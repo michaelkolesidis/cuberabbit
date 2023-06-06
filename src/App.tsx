@@ -1,8 +1,12 @@
+import { Canvas } from "@react-three/fiber";
+import Game from "./Game";
+
 function App() {
   return (
     <>
-      <h1>Untitled Bunny Game</h1>
-      <img src="./bunny.png" />
+      <Canvas>
+        <Game />
+      </Canvas>
     </>
   );
 }
