@@ -1,5 +1,6 @@
 import { OrbitControls } from "@react-three/drei";
-import Lights from "./LIghts";
+import Lights from "./Lights";
+import Level from "./Level";
 import Player from "./Player";
 
 export default function Game() {
@@ -8,11 +9,8 @@ export default function Game() {
       <color args={["#121215"]} attach="background" />
       <OrbitControls />
       <Lights />
+      <Level />
       <Player />
-      <mesh>
-        <boxGeometry />
-        <meshBasicMaterial />
-      </mesh>
     </>
   );
 }
