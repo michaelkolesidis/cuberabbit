@@ -4,11 +4,10 @@ import { useGLTF, useKeyboardControls } from "@react-three/drei";
 import * as THREE from "three";
 import { BOARD_FACTOR } from "../utils/constants";
 
-
 export default function Player() {
   const bunnyModel = useGLTF("./models/bunny.glb");
   const bunny = useRef<THREE.Mesh>(null);
-  const [subscribeKeys, getKeys] = useKeyboardControls();
+  const [subscribeKeys] = useKeyboardControls();
 
   useEffect(() => {
     const unsubscrubeKeys = subscribeKeys(
