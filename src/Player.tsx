@@ -1,31 +1,40 @@
-import { useRef } from "react";
-import { useGLTF } from "@react-three/drei";
+import { useRef, useEffect } from "react";
+import { useFrame, useLoader } from "@react-three/fiber";
+import { useGLTF, useKeyboardControls } from "@react-three/drei";
 import * as THREE from "three";
 
 export default function Player() {
   const bunnyModel = useGLTF("./models/bunny.glb");
   const bunny = useRef<THREE.Mesh>(null);
+  const [subscribeKeys, getKeys] = useKeyboardControls();
 
-  document.addEventListener("keydown", (e) => {
-    if (bunny.current) {
-      try {
-        if (e.code === "ArrowUp") {
-          bunny.current.position.x -= 5;
+  useEffect(() => {
+    const unsubscrubeKeys = subscribeKeys(
+      (state) => state,
+      (value) => {
+        if (bunny.current) {
+          if (value.forward) {
+            bunny.current.position.x += 5;
+          }
+          if (value.backward) {
+            bunny.current.position.x -= 5;
+          }
+
+          if (value.leftward) {
+            bunny.current.position.z -= 5;
+          }
+
+          if (value.rightward) {
+            bunny.current.position.z += 5;
+          }
         }
-        if (e.code === "ArrowDown") {
-          bunny.current.position.x += 5;
-        }
-        if (e.code === "ArrowRight") {
-          bunny.current.position.z -= 5;
-        }
-        if (e.code === "ArrowLeft") {
-          bunny.current.position.z += 5;
-        }
-      } catch (err) {
-        console.log(err);
       }
+    );
+
+    return () => {
+      unsubscrubeKeys();
     }
-  });
+  }, []);
 
   return (
     <>
