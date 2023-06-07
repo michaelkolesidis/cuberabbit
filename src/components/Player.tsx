@@ -41,9 +41,9 @@ export default function Player() {
     <>
       <primitive
         ref={bunny}
-        onClick={() => console.log("Clicked!")}
-        onPointerEnter={() => console.log("Pointer entered")}
-        onPointerLeave={() => console.log("Pointer left")}
+        // onClick={() => console.log("Clicked!")}
+        // onPointerEnter={() => console.log("Pointer entered")}
+        // onPointerLeave={() => console.log("Pointer left")}
         object={bunnyModel.scene}
         scale={1}
       />
