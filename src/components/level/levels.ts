@@ -3,6 +3,7 @@ import { generateRandomLevel } from "./utils";
 export interface LevelData {
   name: string;
   squaresMap: number[][];
+  playerInitialPosition: number[];
 }
 
 export const levels: LevelData[] = [
@@ -13,6 +14,7 @@ export const levels: LevelData[] = [
       [0, 2, 3],
       [0, 0, 0],
     ],
+    playerInitialPosition: [1, 1],
   },
   {
     name: "Level 1",
@@ -23,9 +25,11 @@ export const levels: LevelData[] = [
       [1, 3, 1, 0, 0],
       [1, 0, 1, 1, 2],
     ],
+    playerInitialPosition: [0, 0],
   },
-  {
-    name: "Random Level",
-    squaresMap: generateRandomLevel(10, 10),
-  },
+  // {
+  //   name: "Random Level",
+  //   squaresMap: generateRandomLevel(10, 10),
+  //   playerInitialPosition: [0, 0],
+  // },
 ];

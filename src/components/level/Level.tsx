@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import useGame from "../../stores/useGame";
 import { LevelData } from "./levels";
 import { BOARD_HEIGHT } from "../../utils/constants";
 import { SquareColor } from "../../utils/enums";
@@ -8,6 +10,13 @@ interface LevelProps {
 }
 
 export default function Level({ level }: LevelProps) {
+  const { setPlayerPositionX, setPlayerPositionZ } = useGame();
+
+  useEffect(() => {
+    setPlayerPositionX(level.playerInitialPosition[0]);
+    setPlayerPositionZ(level.playerInitialPosition[1]);
+  }, []);
+
   const squaresMap = level.squaresMap;
 
   const getColorFromValue = (value: number) => {
