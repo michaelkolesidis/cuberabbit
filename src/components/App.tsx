@@ -13,7 +13,7 @@ function App() {
           { name: "rightward", keys: ["ArrowLeft", "KeyA"] },
         ]}
       >
-        <Canvas>
+        <Canvas camera={{ fov: 75, position: [20, 9, 11] }}>
           <Game />
         </Canvas>
       </KeyboardControls>

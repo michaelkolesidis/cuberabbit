@@ -1,8 +1,8 @@
 import * as THREE from "three";
-import { BOARD_FACTOR } from "../utils/constants";
-import { SquareColor } from "../utils/enums";
+import { BOARD_FACTOR } from "../../utils/constants";
+import { SquareColor } from "../../utils/enums";
 
-interface Block {
+interface SquareProps {
   positionX: number;
   positionY?: number;
   positionZ: number;
@@ -14,7 +14,7 @@ export default function Square({
   positionY,
   positionZ,
   color,
-}: Block) {
+}: SquareProps) {
   // Dimensions
   const blockDimensions = {
     x: BOARD_FACTOR * 0.95,
