@@ -4,3 +4,8 @@ export enum SquareColor {
   gray,
   yellow,
 }
+
+export enum CollectibleColor {
+  golden,
+  green,
+}

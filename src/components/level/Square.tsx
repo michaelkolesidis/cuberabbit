@@ -22,47 +22,50 @@ export default function Square({
   const playerPositionZ = useGame((state) => state.playerPositionZ);
 
   // Dimensions
-  const blockDimensions = {
+  const squareDimensions = {
     x: BOARD_FACTOR * 0.95,
     y: 0.45,
     z: BOARD_FACTOR * 0.95,
   };
 
   // Position
-  const blockPosition = new THREE.Vector3(
+  const squarePosition = new THREE.Vector3(
     positionX * BOARD_FACTOR,
     positionY,
     positionZ * BOARD_FACTOR
   );
 
-  // SquareColor
-  let blockColor;
+  // Square Color
+  let squareColor;
   if (color === SquareColor.purple) {
-    blockColor = "#4037e4";
+    squareColor = "#4037e4";
   } else if (color === SquareColor.fuchsia) {
-    blockColor = "#9b2456";
+    squareColor = "#9b2456";
   } else if (color === SquareColor.gray) {
-    blockColor = "#151523";
+    squareColor = "#151523";
   }
-  const activeColor = "#f98607";
+  const playerOnColor = "#f98607";
 
-  const [isActive, setIsActive] = useState(false);
+  // Is the player on the square?
+  const [isPlayerOn, setIsPlayerOn] = useState(false);
 
   useFrame(() => {
     if (playerPositionX === positionX && playerPositionZ === positionZ) {
-      setIsActive(true);
+      setIsPlayerOn(true);
     } else {
-      setIsActive(false);
+      setIsPlayerOn(false);
     }
   });
 
   return (
     <>
-      <mesh position={blockPosition}>
+      <mesh position={squarePosition}>
         <boxGeometry
-          args={[blockDimensions.x, blockDimensions.y, blockDimensions.z]}
+          args={[squareDimensions.x, squareDimensions.y, squareDimensions.z]}
         />
-        <meshStandardMaterial color={isActive ? activeColor : blockColor} />
+        <meshStandardMaterial
+          color={isPlayerOn ? playerOnColor : squareColor}
+        />
       </mesh>
     </>
   );

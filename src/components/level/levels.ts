@@ -3,8 +3,19 @@
 export interface LevelData {
   name: string;
   squaresMap: number[][];
+  collectiblesMap: number[][];
   playerInitialPosition: number[];
 }
+
+// Squares Map Legend
+// 0: No square
+// 1: Purple square
+// 2: Fuchsia square
+// 3: Gray square
+
+// Collectibles Map Legend
+// 0: No collectibles
+// 1: Gem
 
 export const levels: LevelData[] = [
   {
@@ -12,21 +23,26 @@ export const levels: LevelData[] = [
     squaresMap: [
       [1, 1, 0],
       [0, 2, 3],
+      [0, 1, 0],
+    ],
+    collectiblesMap: [
       [0, 0, 0],
+      [0, 0, 1],
+      [0, 2, 0],
     ],
     playerInitialPosition: [0, 0],
   },
-  {
-    name: "Level 1",
-    squaresMap: [
-      [1, 0, 1, 0, 3],
-      [1, 1, 1, 0, 2],
-      [1, 0, 1, 2, 1],
-      [1, 3, 1, 0, 0],
-      [1, 0, 1, 1, 2],
-    ],
-    playerInitialPosition: [0, 0],
-  },
+  // {
+  //   name: "Level 1",
+  //   squaresMap: [
+  //     [1, 0, 1, 0, 3],
+  //     [1, 1, 1, 0, 2],
+  //     [1, 0, 1, 2, 1],
+  //     [1, 3, 1, 0, 0],
+  //     [1, 0, 1, 1, 2],
+  //   ],
+  //   playerInitialPosition: [0, 0],
+  // },
   // {
   //   name: "Random Level",
   //   squaresMap: generateRandomLevel(10, 10),

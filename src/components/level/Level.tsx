@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import useGame from "../../stores/useGame";
 import { LevelData } from "./levels";
 import { BOARD_HEIGHT } from "../../utils/constants";
-import { SquareColor } from "../../utils/enums";
+import { SquareColor, CollectibleColor } from "../../utils/enums";
 import Square from "./Square";
+import Collectible from "./Collectible";
 
 interface LevelProps {
   level: LevelData;
@@ -20,7 +21,7 @@ export default function Level({ level }: LevelProps) {
 
   const squaresMap = level.squaresMap;
 
-  const getColorFromValue = (value: number) => {
+  const getSquareColor = (value: number) => {
     switch (value) {
       case 1:
         return SquareColor.purple;
@@ -39,7 +40,7 @@ export default function Level({ level }: LevelProps) {
         value !== 0 && (
           <Square
             key={`${rowIndex}-${columnIndex}`}
-            color={getColorFromValue(value)}
+            color={getSquareColor(value)}
             positionX={columnIndex}
             positionY={BOARD_HEIGHT}
             positionZ={rowIndex}
@@ -48,35 +49,21 @@ export default function Level({ level }: LevelProps) {
     )
   );
 
-  return <>{Squares}</>;
-}
-
-{
-  /* <Square
-  color={SquareColor.purple}
-  positionX={0}
-  positionY={BOARD_HEIGHT}
-  positionZ={0}
-/>
-
-<Square
-  color={SquareColor.purple}
-  positionX={1}
-  positionY={BOARD_HEIGHT}
-  positionZ={0}
-/>
-
-<Square
-  color={SquareColor.fuchsia}
-  positionX={1}
-  positionY={BOARD_HEIGHT}
-  positionZ={1}
-/>
-
-<Square
-  color={SquareColor.gray}
-  positionX={2}
-  positionY={BOARD_HEIGHT}
-  positionZ={1}
-/> */
+  return (
+    <>
+      {Squares}
+      <Collectible
+        color={CollectibleColor.golden}
+        positionX={1}
+        positionY={0.2}
+        positionZ={2}
+      />
+      <Collectible
+        color={CollectibleColor.green}
+        positionX={2}
+        positionY={0.2}
+        positionZ={1}
+      />
+    </>
+  );
 }
