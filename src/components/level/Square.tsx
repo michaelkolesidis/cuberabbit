@@ -1,4 +1,7 @@
+import { useState } from "react";
+import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import useGame from "../../stores/useGame";
 import { BOARD_FACTOR } from "../../utils/constants";
 import { SquareColor } from "../../utils/enums";
 
@@ -15,6 +18,9 @@ export default function Square({
   positionZ,
   color,
 }: SquareProps) {
+  const playerPositionX = useGame((state) => state.playerPositionX);
+  const playerPositionZ = useGame((state) => state.playerPositionZ);
+
   // Dimensions
   const blockDimensions = {
     x: BOARD_FACTOR * 0.95,
@@ -38,6 +44,17 @@ export default function Square({
   } else if (color === SquareColor.gray) {
     blockColor = "#151523";
   }
+  const activeColor = "#f98607";
+
+  const [isActive, setIsActive] = useState(false);
+
+  useFrame(() => {
+    if (playerPositionX === positionX && playerPositionZ === positionZ) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  });
 
   return (
     <>
@@ -45,7 +62,7 @@ export default function Square({
         <boxGeometry
           args={[blockDimensions.x, blockDimensions.y, blockDimensions.z]}
         />
-        <meshStandardMaterial color={blockColor} />
+        <meshStandardMaterial color={isActive ? activeColor : blockColor} />
       </mesh>
     </>
   );

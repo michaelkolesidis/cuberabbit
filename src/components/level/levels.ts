@@ -14,7 +14,7 @@ export const levels: LevelData[] = [
       [0, 2, 3],
       [0, 0, 0],
     ],
-    playerInitialPosition: [1, 1],
+    playerInitialPosition: [0, 0],
   },
   {
     name: "Level 1",

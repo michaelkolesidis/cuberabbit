@@ -10,7 +10,8 @@ interface LevelProps {
 }
 
 export default function Level({ level }: LevelProps) {
-  const { setPlayerPositionX, setPlayerPositionZ } = useGame();
+  const setPlayerPositionX = useGame((state) => state.setPlayerPositionX);
+  const setPlayerPositionZ = useGame((state) => state.setPlayerPositionZ);
 
   useEffect(() => {
     setPlayerPositionX(level.playerInitialPosition[0]);

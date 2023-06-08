@@ -1,8 +1,8 @@
 import { useRef, useEffect } from "react";
-// import { useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { useGLTF, useKeyboardControls } from "@react-three/drei";
 import * as THREE from "three";
-// import useGame from "../stores/useGame";
+import useGame from "../stores/useGame";
 import { BOARD_FACTOR } from "../utils/constants";
 
 interface PlayerProps {
@@ -12,6 +12,9 @@ interface PlayerProps {
 }
 
 export default function Player({ positionX, positionZ }: PlayerProps) {
+  const setPlayerPositionX = useGame((state) => state.setPlayerPositionX);
+  const setPlayerPositionZ = useGame((state) => state.setPlayerPositionZ);
+
   const bunnyModel = useGLTF("./models/b.exs");
   const bunny = useRef<THREE.Mesh>(null);
   const [subscribeKeys] = useKeyboardControls();
@@ -50,6 +53,23 @@ export default function Player({ positionX, positionZ }: PlayerProps) {
       unsubscrubeKeys();
     };
   }, []);
+
+  useFrame(() => {
+    if (bunny.current) {
+      const { x, z } = bunny.current.position;
+      const newX = Math.round(x / BOARD_FACTOR);
+      const newZ = Math.round(z / BOARD_FACTOR);
+
+      if (newX !== positionX) {
+        setPlayerPositionX(newX);
+        console.log("SET A NEW X: " + newX);
+      }
+      if (newZ !== positionZ) {
+        setPlayerPositionZ(newZ);
+        console.log("SET A NEW Z: " + newZ);
+      }
+    }
+  });
 
   return (
     <>
