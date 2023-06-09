@@ -33,16 +33,16 @@ export default function Level({ level }: LevelProps) {
     }
   };
 
-  const getCollectibleColor = (value: number) => {
-    switch (value) {
-      case 1:
-        return CollectibleColor.golden;
-      case 2:
-        return CollectibleColor.green;
-      default:
-        return CollectibleColor.golden;
-    }
-  };
+  // const getCollectibleColor = (value: number) => {
+  //   switch (value) {
+  //     case 1:
+  //       return CollectibleColor.golden;
+  //     case 2:
+  //       return CollectibleColor.green;
+  //     default:
+  //       return CollectibleColor.golden;
+  //   }
+  // };
 
   const squaresMap = level.squaresMap;
 
