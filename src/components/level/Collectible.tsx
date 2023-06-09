@@ -64,7 +64,7 @@ export default function Collectible({
     <>
       {!isCollected && (
         <mesh ref={collectible} position={collectiblePosition}>
-          <icosahedronGeometry args={[1.1, 0]} />
+          <icosahedronGeometry args={[BOARD_FACTOR * 0.22, 0]} />
           <meshStandardMaterial flatShading color={collectibleColor} />
         </mesh>
       )}

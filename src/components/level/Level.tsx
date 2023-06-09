@@ -14,12 +14,11 @@ export default function Level({ level }: LevelProps) {
   const setPlayerPositionX = useGame((state) => state.setPlayerPositionX);
   const setPlayerPositionZ = useGame((state) => state.setPlayerPositionZ);
 
+  // Set
   useEffect(() => {
     setPlayerPositionX(level.playerInitialPosition[0]);
     setPlayerPositionZ(level.playerInitialPosition[1]);
   }, []);
-
-  const squaresMap = level.squaresMap;
 
   const getSquareColor = (value: number) => {
     switch (value) {
@@ -33,6 +32,19 @@ export default function Level({ level }: LevelProps) {
         return SquareColor.purple;
     }
   };
+
+  const getCollectibleColor = (value: number) => {
+    switch (value) {
+      case 1:
+        return CollectibleColor.golden;
+      case 2:
+        return CollectibleColor.green;
+      default:
+        return CollectibleColor.golden;
+    }
+  };
+
+  const squaresMap = level.squaresMap;
 
   const Squares = squaresMap.flatMap((row, rowIndex) =>
     row.map(
