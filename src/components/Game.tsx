@@ -16,14 +16,20 @@ export default function Game() {
     console.log("STORED Z: " + playerPositionZ);
   }, [playerPositionX, playerPositionZ]);
 
+  const currentLevel = levels[1];
+
   return (
     <>
       <color args={["#121215"]} attach="background" />
       <Perf position="bottom-left" />
       <OrbitControls />
       <Lights />
-      <Level level={levels[1]} />
-      <Player positionX={playerPositionX} positionZ={playerPositionZ} />
+      <Level level={currentLevel} />
+      <Player
+        positionX={playerPositionX}
+        positionZ={playerPositionZ}
+        squaresMap={currentLevel.squaresMap}
+      />
     </>
   );
 }

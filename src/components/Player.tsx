@@ -9,9 +9,14 @@ interface PlayerProps {
   positionX: number;
   positionY?: number;
   positionZ: number;
+  squaresMap: number[][];
 }
 
-export default function Player({ positionX, positionZ }: PlayerProps) {
+export default function Player({
+  positionX,
+  positionZ,
+  squaresMap,
+}: PlayerProps) {
   const setPlayerPositionX = useGame((state) => state.setPlayerPositionX);
   const setPlayerPositionZ = useGame((state) => state.setPlayerPositionZ);
   const addMove = useGame((state) => state.addMove);
@@ -27,26 +32,60 @@ export default function Player({ positionX, positionZ }: PlayerProps) {
 
   useEffect(() => {
     if (phase !== "ended") {
-      const unsubscrubeKeys = subscribeKeys(
+      const movePlayer = (dx: number, dz: number) => {
+        console.log("MOVEPLAYER positionX: " + positionX);
+        console.log("MOVEPLAYER positionZ: " + positionZ);
+
+        let newPositionX, newPositionZ;
+
+        if (rabbit.current) {
+          newPositionX = rabbit.current.position.x / BOARD_FACTOR + dx;
+          newPositionZ = rabbit.current.position.z / BOARD_FACTOR + dz;
+        }
+
+        console.log("MOVEPLAYER NEW positionX: " + newPositionX);
+        console.log("MOVEPLAYER  NEW positionZ: " + newPositionZ);
+
+        if (
+          newPositionX !== undefined &&
+          newPositionZ !== undefined &&
+          newPositionX >= 0 &&
+          newPositionX < squaresMap[0].length &&
+          newPositionZ >= 0 &&
+          newPositionZ < squaresMap.length &&
+          squaresMap[newPositionZ][newPositionX] !== 0
+        ) {
+          if (rabbit.current) {
+            rabbit.current.position.x += dx * BOARD_FACTOR;
+            rabbit.current.position.z += dz * BOARD_FACTOR;
+          }
+        }
+      };
+
+      const unsubscribeKeys = subscribeKeys(
         (state) => state,
         (value) => {
           if (rabbit.current) {
             if (value.forward) {
-              rabbit.current.position.x += BOARD_FACTOR;
+              // rabbit.current.position.x += BOARD_FACTOR;
+              movePlayer(1, 0);
               rabbit.current.rotation.y = 0;
             }
             if (value.backward) {
-              rabbit.current.position.x -= BOARD_FACTOR;
+              // rabbit.current.position.x -= BOARD_FACTOR;
+              movePlayer(-1, 0);
               rabbit.current.rotation.y = Math.PI;
             }
 
             if (value.leftward) {
-              rabbit.current.position.z -= BOARD_FACTOR;
+              // rabbit.current.position.z -= BOARD_FACTOR;
+              movePlayer(0, -1);
               rabbit.current.rotation.y = Math.PI / 2;
             }
 
             if (value.rightward) {
-              rabbit.current.position.z += BOARD_FACTOR;
+              // rabbit.current.position.z += BOARD_FACTOR;
+              movePlayer(0, 1);
               rabbit.current.rotation.y = -Math.PI / 2;
             }
           }
@@ -58,7 +97,7 @@ export default function Player({ positionX, positionZ }: PlayerProps) {
       });
 
       return () => {
-        unsubscrubeKeys();
+        unsubscribeKeys();
         unsubscribeAny();
       };
     }
