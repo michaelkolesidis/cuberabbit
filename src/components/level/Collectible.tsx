@@ -12,6 +12,11 @@ interface CollectibleProps {
   color?: CollectibleColor;
 }
 
+const collectibleGeometry = new THREE.IcosahedronGeometry(
+  BOARD_FACTOR * 0.22,
+  0
+);
+
 export default function Collectible({
   positionX,
   positionY,
@@ -62,8 +67,12 @@ export default function Collectible({
   return (
     <>
       {!isCollected && (
-        <mesh ref={collectible} position={collectiblePosition}>
-          <icosahedronGeometry args={[BOARD_FACTOR * 0.22, 0]} />
+        <mesh
+          ref={collectible}
+          position={collectiblePosition}
+          geometry={collectibleGeometry}
+        >
+          {/* <icosahedronGeometry args={[BOARD_FACTOR * 0.22, 0]} /> */}
           <meshStandardMaterial flatShading color={collectibleColor} />
         </mesh>
       )}
