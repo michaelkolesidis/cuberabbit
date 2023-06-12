@@ -1,6 +1,6 @@
-![Bunny](./public/bunny.png)
+![Cube Rabbit](./public/cube_rabbit.png)
 
-# Untitled Bunny Game
+# Cube Rabbit
 
 ## License
 

@@ -15,7 +15,7 @@
 
 - Level generation from array
 - Each block should know its position
-- Each block should know if bunny is on it
+- Each block should know if rabbit is on it
 - Each block should know if a reward is on it
 
 ### Movement
@@ -37,3 +37,30 @@
 - Create poster
 - Better favicon
 - Create store page (T-Shirt etc)
+
+## Name Suggestions
+
+### Titles
+
+- Cube Hopper
+- Bunny Bounce
+
+### Level Names
+
+- Warren Wonders
+- Hare Today, Gone Tomorrow
+- Bunny Blitz
+- Hare-raising Adventures
+- A Hare-y Quest
+- Bounce 'n' Burrow
+- Bunny Hopscotch
+- Hare Force One
+- Hare Trigge
+- The Great Bunny Bake-Off
+- Jumping Jamboree
+- The Hopping Herald
+- Bunny Blunder
+- Hareborne Heroes
+- Bunny Bonanza
+- Hare and Back Again
+- Hare of Darkness

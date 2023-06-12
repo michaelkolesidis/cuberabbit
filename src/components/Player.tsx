@@ -17,8 +17,8 @@ export default function Player({ positionX, positionZ }: PlayerProps) {
   const addMove = useGame((state) => state.addMove);
   const start = useGame((state) => state.start);
 
-  const bunnyModel = useGLTF("./models/b.exs");
-  const bunny = useRef<THREE.Mesh>(null);
+  const rabbitModel = useGLTF("./models/r.exs");
+  const rabbit = useRef<THREE.Mesh>(null);
   const [subscribeKeys] = useKeyboardControls();
 
   const initialPositionX = positionX * BOARD_FACTOR;
@@ -28,24 +28,24 @@ export default function Player({ positionX, positionZ }: PlayerProps) {
     const unsubscrubeKeys = subscribeKeys(
       (state) => state,
       (value) => {
-        if (bunny.current) {
+        if (rabbit.current) {
           if (value.forward) {
-            bunny.current.position.x += BOARD_FACTOR;
-            bunny.current.rotation.y = 0;
+            rabbit.current.position.x += BOARD_FACTOR;
+            rabbit.current.rotation.y = 0;
           }
           if (value.backward) {
-            bunny.current.position.x -= BOARD_FACTOR;
-            bunny.current.rotation.y = Math.PI;
+            rabbit.current.position.x -= BOARD_FACTOR;
+            rabbit.current.rotation.y = Math.PI;
           }
 
           if (value.leftward) {
-            bunny.current.position.z -= BOARD_FACTOR;
-            bunny.current.rotation.y = Math.PI / 2;
+            rabbit.current.position.z -= BOARD_FACTOR;
+            rabbit.current.rotation.y = Math.PI / 2;
           }
 
           if (value.rightward) {
-            bunny.current.position.z += BOARD_FACTOR;
-            bunny.current.rotation.y = -Math.PI / 2;
+            rabbit.current.position.z += BOARD_FACTOR;
+            rabbit.current.rotation.y = -Math.PI / 2;
           }
         }
       }
@@ -62,8 +62,8 @@ export default function Player({ positionX, positionZ }: PlayerProps) {
   }, []);
 
   useFrame(() => {
-    if (bunny.current) {
-      const { x, z } = bunny.current.position;
+    if (rabbit.current) {
+      const { x, z } = rabbit.current.position;
       const newX = Math.round(x / BOARD_FACTOR);
       const newZ = Math.round(z / BOARD_FACTOR);
 
@@ -83,11 +83,11 @@ export default function Player({ positionX, positionZ }: PlayerProps) {
   return (
     <>
       <primitive
-        ref={bunny}
+        ref={rabbit}
         // onClick={() => console.log("Clicked!")}
         // onPointerEnter={() => console.log("Pointer entered")}
         // onPointerLeave={() => console.log("Pointer left")}
-        object={bunnyModel.scene}
+        object={rabbitModel.scene}
         scale={1}
         position={[initialPositionX, 0, initialPositionZ]}
       />

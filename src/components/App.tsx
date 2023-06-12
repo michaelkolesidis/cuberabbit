@@ -29,6 +29,8 @@ function App() {
         ]}
       >
         <div className="interface">
+          <p>CUBE RABBIT</p>
+          <p>—————————</p>
           <p>PHASE : {phase.toUpperCase()}</p>
           <p>
             COLLECTED : {collected}/{collectibles}
