@@ -34,17 +34,25 @@ export const levels: LevelData[] = [
     collectibles: 2,
     playerInitialPosition: [0, 0],
   },
-  // {
-  //   name: "Level 1",
-  //   squaresMap: [
-  //     [1, 0, 1, 0, 3],
-  //     [1, 1, 1, 0, 2],
-  //     [1, 0, 1, 2, 1],
-  //     [1, 3, 1, 0, 0],
-  //     [1, 0, 1, 1, 2],
-  //   ],
-  //   playerInitialPosition: [0, 0],
-  // },
+  {
+    name: "Level 1",
+    squaresMap: [
+      [1, 0, 1, 0, 3],
+      [1, 1, 1, 0, 2],
+      [1, 0, 1, 2, 1],
+      [1, 3, 1, 0, 0],
+      [1, 0, 1, 1, 2],
+    ],
+    collectiblesMap: [
+      [0, 0, 1, 0, 2],
+      [0, 0, 1, 0, 0],
+      [0, 0, 0, 0, 1],
+      [0, 0, 0, 0, 0],
+      [1, 0, 0, 1, 1],
+    ],
+    collectibles: 7,
+    playerInitialPosition: [0, 0],
+  },
   // {
   //   name: "Random Level",
   //   squaresMap: generateRandomLevel(10, 10),

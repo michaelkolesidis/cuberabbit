@@ -29,7 +29,7 @@ function App() {
         ]}
       >
         <div className="interface">
-          <p>PHASE: {phase}</p>
+          <p>PHASE: {phase.toUpperCase()}</p>
           <p>MOVES: {moves}</p>
           <p>COLLECTIBLES: {collectibles}</p>
           <p>COLLECTED: {collected}</p>

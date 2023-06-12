@@ -22,7 +22,7 @@ export default function Game() {
       <Perf position="bottom-left" />
       <OrbitControls />
       <Lights />
-      <Level level={levels[0]} />
+      <Level level={levels[1]} />
       <Player positionX={playerPositionX} positionZ={playerPositionZ} />
     </>
   );
