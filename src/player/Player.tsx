@@ -114,20 +114,25 @@ export default function Player({
     }
   }, [phase]);
 
+  const prevPositionX = useRef(positionX);
+  const prevPositionZ = useRef(positionZ);
+
   useFrame(() => {
     if (rabbit.current) {
       const { x, z } = rabbit.current.position;
       const newX = Math.round(x / BOARD_FACTOR);
       const newZ = Math.round(z / BOARD_FACTOR);
 
-      if (newX !== positionX) {
+      if (newX !== prevPositionX.current) {
         setPlayerPositionX(newX);
         addMove();
+        prevPositionX.current = newX;
         console.log("SET A NEW X: " + newX);
       }
-      if (newZ !== positionZ) {
+      if (newZ !== prevPositionZ.current) {
         setPlayerPositionZ(newZ);
         addMove();
+        prevPositionZ.current = newZ;
         console.log("SET A NEW Z: " + newZ);
       }
     }

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -11,6 +13,7 @@
   box-sizing: border-box;
   overflow: hidden;
   touch-action: none;
+  font-family: "Spline Sans", sans-serif;
 }
 
 a,
@@ -47,4 +50,9 @@ body,
   z-index: 1;
   margin: 0.5em;
   font-weight: 600;
+}
+
+.interface > h1 {
+  font-size: 3em;
+  font-weight: 700;
 }
