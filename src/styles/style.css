@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "Paytone One", sans-serif;
+  font-family: sans-serif;
   user-select: none;
   -moz-user-drag: none;
   -webkit-user-drag: none;
@@ -37,4 +37,14 @@ body,
   position: fixed;
   top: 0;
   left: 0;
+}
+
+.interface {
+  position: fixed;
+  color: white;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  margin: 0.5em;
+  font-weight: 600;
 }

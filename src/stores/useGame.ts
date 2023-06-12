@@ -12,6 +12,19 @@ type State = {
   playerPositionZ: number;
   setPlayerPositionX: (x: number) => void;
   setPlayerPositionZ: (z: number) => void;
+  // Player moves
+  moves: number;
+  addMove: () => void;
+  // Collectibles
+  collectibles: number | null;
+  setCollectibles: (amount: number) => void;
+  collected: number;
+  collect: () => void;
+  // Phases
+  phase: "ready" | "playing" | "ended";
+  start: () => void;
+  restart: () => void;
+  end: () => void;
 };
 
 const store = create<State>()(
@@ -34,6 +47,72 @@ const store = create<State>()(
         return {
           playerPositionZ: z,
         };
+      });
+    },
+
+    /**
+     * Player Moves
+     * The total moves of the player
+     */
+    moves: 0,
+    addMove: () => {
+      set((state) => {
+        return {
+          moves: state.moves + 1,
+        };
+      });
+    },
+
+    /**
+     * Collectibles
+     * The items to be collected by the player
+     */
+    collectibles: null,
+    setCollectibles: (amount: number) => {
+      set(() => {
+        return {
+          collectibles: amount,
+        };
+      });
+    },
+    collected: 0,
+    collect: () => {
+      set((state) => {
+        return {
+          collected: state.collected + 1,
+        };
+      });
+    },
+
+    /**
+     * Phases
+     * The phase of the game
+     */
+    phase: "ready",
+    start: () => {
+      set((state) => {
+        if (state.phase === "ready") {
+          return { phase: "playing" };
+        }
+        return {};
+      });
+    },
+
+    restart: () => {
+      set((state) => {
+        if (state.phase === "playing" || state.phase === "ended") {
+          return { phase: "ready" };
+        }
+        return {};
+      });
+    },
+
+    end: () => {
+      set((state) => {
+        if (state.phase === "playing") {
+          return { phase: "ended" };
+        }
+        return {};
       });
     },
   }))

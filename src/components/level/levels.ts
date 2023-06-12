@@ -4,6 +4,7 @@ export interface LevelData {
   name: string;
   squaresMap: number[][];
   collectiblesMap: number[][];
+  collectibles: number;
   playerInitialPosition: number[];
 }
 
@@ -27,9 +28,10 @@ export const levels: LevelData[] = [
     ],
     collectiblesMap: [
       [0, 0, 0],
-      [0, 0, 1],
-      [0, 2, 0],
+      [0, 0, 2],
+      [0, 1, 0],
     ],
+    collectibles: 2,
     playerInitialPosition: [0, 0],
   },
   // {

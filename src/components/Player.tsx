@@ -14,6 +14,8 @@ interface PlayerProps {
 export default function Player({ positionX, positionZ }: PlayerProps) {
   const setPlayerPositionX = useGame((state) => state.setPlayerPositionX);
   const setPlayerPositionZ = useGame((state) => state.setPlayerPositionZ);
+  const addMove = useGame((state) => state.addMove);
+  const start = useGame((state) => state.start);
 
   const bunnyModel = useGLTF("./models/b.exs");
   const bunny = useRef<THREE.Mesh>(null);
@@ -49,8 +51,13 @@ export default function Player({ positionX, positionZ }: PlayerProps) {
       }
     );
 
+    const unsubscribeAny = subscribeKeys(() => {
+      start();
+    });
+
     return () => {
       unsubscrubeKeys();
+      unsubscribeAny();
     };
   }, []);
 
@@ -62,10 +69,12 @@ export default function Player({ positionX, positionZ }: PlayerProps) {
 
       if (newX !== positionX) {
         setPlayerPositionX(newX);
+        addMove();
         console.log("SET A NEW X: " + newX);
       }
       if (newZ !== positionZ) {
         setPlayerPositionZ(newZ);
+        addMove();
         console.log("SET A NEW Z: " + newZ);
       }
     }

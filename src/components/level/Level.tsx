@@ -13,13 +13,16 @@ interface LevelProps {
 export default function Level({ level }: LevelProps) {
   const setPlayerPositionX = useGame((state) => state.setPlayerPositionX);
   const setPlayerPositionZ = useGame((state) => state.setPlayerPositionZ);
+  const setCollectibles = useGame((state) => state.setCollectibles);
 
-  // Set
+  // Setters
   useEffect(() => {
     setPlayerPositionX(level.playerInitialPosition[0]);
     setPlayerPositionZ(level.playerInitialPosition[1]);
+    setCollectibles(level.collectibles);
   }, []);
 
+  // Squares
   const getSquareColor = (value: number) => {
     switch (value) {
       case 1:
@@ -33,19 +36,7 @@ export default function Level({ level }: LevelProps) {
     }
   };
 
-  // const getCollectibleColor = (value: number) => {
-  //   switch (value) {
-  //     case 1:
-  //       return CollectibleColor.golden;
-  //     case 2:
-  //       return CollectibleColor.green;
-  //     default:
-  //       return CollectibleColor.golden;
-  //   }
-  // };
-
   const squaresMap = level.squaresMap;
-
   const Squares = squaresMap.flatMap((row, rowIndex) =>
     row.map(
       (value, columnIndex) =>
@@ -61,21 +52,38 @@ export default function Level({ level }: LevelProps) {
     )
   );
 
+  // Collectibles
+  const getCollectibleColor = (value: number) => {
+    switch (value) {
+      case 1:
+        return CollectibleColor.golden;
+      case 2:
+        return CollectibleColor.green;
+      default:
+        return CollectibleColor.golden;
+    }
+  };
+
+  const collectiblesMap = level.collectiblesMap;
+  const Collectibles = collectiblesMap.flatMap((row, rowIndex) =>
+    row.map(
+      (value, columnIndex) =>
+        value !== 0 && (
+          <Collectible
+            key={`${rowIndex}-${columnIndex}`}
+            color={getCollectibleColor(value)}
+            positionX={columnIndex}
+            positionY={0.2}
+            positionZ={rowIndex}
+          />
+        )
+    )
+  );
+
   return (
     <>
       {Squares}
-      <Collectible
-        color={CollectibleColor.golden}
-        positionX={1}
-        positionY={0.2}
-        positionZ={2}
-      />
-      <Collectible
-        color={CollectibleColor.green}
-        positionX={2}
-        positionY={0.2}
-        positionZ={1}
-      />
+      {Collectibles}
     </>
   );
 }
