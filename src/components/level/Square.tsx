@@ -12,6 +12,12 @@ interface SquareProps {
   color?: SquareColor;
 }
 
+const squareGeometry = new THREE.BoxGeometry(
+  BOARD_FACTOR * 0.95,
+  0.45,
+  BOARD_FACTOR * 0.95
+);
+
 export default function Square({
   positionX,
   positionY,
@@ -60,10 +66,10 @@ export default function Square({
 
   return (
     <>
-      <mesh position={squarePosition}>
-        <boxGeometry
+      <mesh position={squarePosition} geometry={squareGeometry}>
+        {/* <boxGeometry
           args={[squareDimensions.x, squareDimensions.y, squareDimensions.z]}
-        />
+        /> */}
         <meshStandardMaterial color={squareColor} />
       </mesh>
     </>
