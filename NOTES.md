@@ -2,6 +2,8 @@
 
 ## To-Do
 
+- Make orthographic camera zoom according to sceeen width
+
 ### Game Modes
 
 - Least moves

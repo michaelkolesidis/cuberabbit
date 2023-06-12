@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { KeyboardControls } from "@react-three/drei";
+import { KeyboardControls, OrthographicCamera } from "@react-three/drei";
 import useGame from "../stores/useGame";
 import Game from "./Game";
 
@@ -29,13 +29,23 @@ function App() {
         ]}
       >
         <div className="interface">
-          <p>PHASE: {phase.toUpperCase()}</p>
-          <p>MOVES: {moves}</p>
-          <p>COLLECTIBLES: {collectibles}</p>
-          <p>COLLECTED: {collected}</p>
+          <p>PHASE : {phase.toUpperCase()}</p>
+          <p>
+            COLLECTED : {collected}/{collectibles}
+          </p>
+          <p>MOVES : {moves}</p>
           {phase === "ended" && <p>FINISHED!</p>}
         </div>
-        <Canvas camera={{ fov: 75, position: [20, 9, 11] }}>
+        <Canvas
+        // camera={{ fov: 75, position: [20, 9, 11] }}
+        >
+          <OrthographicCamera
+            makeDefault
+            near={1}
+            far={100}
+            position={[50, 30, 40]}
+            zoom={30}
+          />
           <Game />
         </Canvas>
       </KeyboardControls>

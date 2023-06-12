@@ -23,14 +23,7 @@ export default function Collectible({
   const playerPositionX = useGame((state) => state.playerPositionX);
   const playerPositionZ = useGame((state) => state.playerPositionZ);
 
-  // const collectibles = useGame((state) => state.collectibles);
   const collect = useGame((state) => state.collect);
-
-  // Dimensions
-  //   const collectibleDimensions = {
-  // radius: BOARD_FACTOR / BOARD_FACTOR,
-  // detail: 0,
-  //   };
 
   // Position
   const collectiblePosition = new THREE.Vector3(

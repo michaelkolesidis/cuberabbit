@@ -13,16 +13,18 @@ export interface LevelData {
 // 1: Purple square
 // 2: Fuchsia square
 // 3: Gray square
+// 4: Yellow square
 
 // Collectibles Map Legend
 // 0: No collectibles
-// 1: Gem
+// 1: Yellow Gem
+// 2: Green Gem
 
 export const levels: LevelData[] = [
   {
     name: "Level 0",
     squaresMap: [
-      [1, 1, 0],
+      [4, 1, 0],
       [0, 2, 3],
       [0, 1, 0],
     ],
@@ -37,7 +39,7 @@ export const levels: LevelData[] = [
   {
     name: "Level 1",
     squaresMap: [
-      [1, 0, 1, 0, 3],
+      [4, 0, 1, 0, 3],
       [1, 1, 1, 0, 2],
       [1, 0, 1, 2, 1],
       [1, 3, 1, 0, 0],

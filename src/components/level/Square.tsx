@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { useFrame } from "@react-three/fiber";
+// import { useState } from "react";
+// import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import useGame from "../../stores/useGame";
+// import useGame from "../../stores/useGame";
 import { BOARD_FACTOR } from "../../utils/constants";
 import { SquareColor } from "../../utils/enums";
 
@@ -18,8 +18,8 @@ export default function Square({
   positionZ,
   color,
 }: SquareProps) {
-  const playerPositionX = useGame((state) => state.playerPositionX);
-  const playerPositionZ = useGame((state) => state.playerPositionZ);
+  // const playerPositionX = useGame((state) => state.playerPositionX);
+  // const playerPositionZ = useGame((state) => state.playerPositionZ);
 
   // Dimensions
   const squareDimensions = {
@@ -43,19 +43,20 @@ export default function Square({
     squareColor = "#9b2456";
   } else if (color === SquareColor.gray) {
     squareColor = "#151523";
+  } else if (color === SquareColor.yellow) {
+    squareColor = "#f98607";
   }
-  const playerOnColor = "#f98607";
 
   // Is the player on the square?
-  const [isPlayerOn, setIsPlayerOn] = useState(false);
+  // const [isPlayerOn, setIsPlayerOn] = useState(false);
 
-  useFrame(() => {
-    if (playerPositionX === positionX && playerPositionZ === positionZ) {
-      setIsPlayerOn(true);
-    } else {
-      setIsPlayerOn(false);
-    }
-  });
+  // useFrame(() => {
+  //   if (playerPositionX === positionX && playerPositionZ === positionZ) {
+  //     setIsPlayerOn(true);
+  //   } else {
+  //     setIsPlayerOn(false);
+  //   }
+  // });
 
   return (
     <>
@@ -63,9 +64,7 @@ export default function Square({
         <boxGeometry
           args={[squareDimensions.x, squareDimensions.y, squareDimensions.z]}
         />
-        <meshStandardMaterial
-          color={isPlayerOn ? playerOnColor : squareColor}
-        />
+        <meshStandardMaterial color={squareColor} />
       </mesh>
     </>
   );

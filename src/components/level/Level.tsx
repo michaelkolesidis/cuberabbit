@@ -31,6 +31,8 @@ export default function Level({ level }: LevelProps) {
         return SquareColor.fuchsia;
       case 3:
         return SquareColor.gray;
+      case 4:
+        return SquareColor.yellow;
       default:
         return SquareColor.purple;
     }
