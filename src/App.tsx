@@ -52,14 +52,22 @@ function App() {
         ]}
       >
         <div className="interface">
-          <p>CUBE RABBIT</p>
+          <h1>CUBE RABBIT</h1>
           <p>Collect all the items and return to initial position</p>
-          <p>—————————</p>
-          <p>PHASE : {phase.toUpperCase()}</p>
+          <br />
           <p>
-            COLLECTED : {collected}/{collectibles}
+            Phase
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {phase.toUpperCase()}
           </p>
-          <p>MOVES : {moves}</p>
+          <p>
+            Collected &nbsp;&nbsp;&nbsp; {collected}/{collectibles}
+          </p>
+          <p>
+            Moves
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {moves}
+          </p>
           {phase === "ended" && <p>LEVEL CLEAR!</p>}
         </div>
         <Canvas
