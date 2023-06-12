@@ -15,6 +15,7 @@ export default function Player({ positionX, positionZ }: PlayerProps) {
   const setPlayerPositionX = useGame((state) => state.setPlayerPositionX);
   const setPlayerPositionZ = useGame((state) => state.setPlayerPositionZ);
   const addMove = useGame((state) => state.addMove);
+  const phase = useGame((state) => state.phase);
   const start = useGame((state) => state.start);
 
   const rabbitModel = useGLTF("./models/r.exs");
@@ -25,41 +26,54 @@ export default function Player({ positionX, positionZ }: PlayerProps) {
   const initialPositionZ = positionZ * BOARD_FACTOR;
 
   useEffect(() => {
-    const unsubscrubeKeys = subscribeKeys(
-      (state) => state,
-      (value) => {
-        if (rabbit.current) {
-          if (value.forward) {
-            rabbit.current.position.x += BOARD_FACTOR;
-            rabbit.current.rotation.y = 0;
-          }
-          if (value.backward) {
-            rabbit.current.position.x -= BOARD_FACTOR;
-            rabbit.current.rotation.y = Math.PI;
-          }
+    if (phase !== "ended") {
+      const unsubscrubeKeys = subscribeKeys(
+        (state) => state,
+        (value) => {
+          if (rabbit.current) {
+            if (value.forward) {
+              rabbit.current.position.x += BOARD_FACTOR;
+              rabbit.current.rotation.y = 0;
+            }
+            if (value.backward) {
+              rabbit.current.position.x -= BOARD_FACTOR;
+              rabbit.current.rotation.y = Math.PI;
+            }
 
-          if (value.leftward) {
-            rabbit.current.position.z -= BOARD_FACTOR;
-            rabbit.current.rotation.y = Math.PI / 2;
-          }
+            if (value.leftward) {
+              rabbit.current.position.z -= BOARD_FACTOR;
+              rabbit.current.rotation.y = Math.PI / 2;
+            }
 
-          if (value.rightward) {
-            rabbit.current.position.z += BOARD_FACTOR;
-            rabbit.current.rotation.y = -Math.PI / 2;
+            if (value.rightward) {
+              rabbit.current.position.z += BOARD_FACTOR;
+              rabbit.current.rotation.y = -Math.PI / 2;
+            }
           }
         }
-      }
-    );
+      );
 
-    const unsubscribeAny = subscribeKeys(() => {
-      start();
-    });
+      const unsubscribeAny = subscribeKeys(() => {
+        start();
+      });
 
-    return () => {
-      unsubscrubeKeys();
-      unsubscribeAny();
-    };
-  }, []);
+      return () => {
+        unsubscrubeKeys();
+        unsubscribeAny();
+      };
+    }
+  }, [phase]);
+
+  // Player always faces forward when the game ends
+  useEffect(() => {
+    if (phase === "ended") {
+      setTimeout(() => {
+        if (rabbit.current) {
+          rabbit.current.rotation.y = 0;
+        }
+      }, 500);
+    }
+  }, [phase]);
 
   useFrame(() => {
     if (rabbit.current) {

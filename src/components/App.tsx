@@ -5,6 +5,14 @@ import useGame from "../stores/useGame";
 import Game from "./Game";
 
 function App() {
+  const initialPlayerPositionX = useGame(
+    (state) => state.initialPlayerPositionX
+  );
+  const initialPlayerPositionZ = useGame(
+    (state) => state.initialPlayerPositionZ
+  );
+  const playerPositionX = useGame((state) => state.playerPositionX);
+  const playerPositionZ = useGame((state) => state.playerPositionZ);
   const moves = useGame((state) => state.moves);
   const collectibles = useGame((state) => state.collectibles);
   const collected = useGame((state) => state.collected);
@@ -12,11 +20,15 @@ function App() {
   const end = useGame((state) => state.end);
 
   useEffect(() => {
-    if (collectibles === collected) {
+    if (
+      collectibles === collected &&
+      initialPlayerPositionX === playerPositionX &&
+      initialPlayerPositionZ === playerPositionZ
+    ) {
       end();
       console.log("ENDED!");
     }
-  }, [collectibles, collected]);
+  }, [collectibles, collected, playerPositionX, playerPositionZ]);
 
   return (
     <>

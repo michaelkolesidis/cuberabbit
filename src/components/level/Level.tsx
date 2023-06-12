@@ -11,12 +11,20 @@ interface LevelProps {
 }
 
 export default function Level({ level }: LevelProps) {
+  const setInitialPlayerPositionX = useGame(
+    (state) => state.setInitialPlayerPositionX
+  );
+  const setInitialPlayerPositionZ = useGame(
+    (state) => state.setInitialPlayerPositionZ
+  );
   const setPlayerPositionX = useGame((state) => state.setPlayerPositionX);
   const setPlayerPositionZ = useGame((state) => state.setPlayerPositionZ);
   const setCollectibles = useGame((state) => state.setCollectibles);
 
   // Setters
   useEffect(() => {
+    setInitialPlayerPositionX(level.playerInitialPosition[0]);
+    setInitialPlayerPositionZ(level.playerInitialPosition[1]);
     setPlayerPositionX(level.playerInitialPosition[0]);
     setPlayerPositionZ(level.playerInitialPosition[1]);
     setCollectibles(level.collectibles);

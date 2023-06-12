@@ -8,6 +8,10 @@ import { subscribeWithSelector } from "zustand/middleware";
 
 type State = {
   // Player position
+  initialPlayerPositionX: number;
+  initialPlayerPositionZ: number;
+  setInitialPlayerPositionX: (x: number) => void;
+  setInitialPlayerPositionZ: (z: number) => void;
   playerPositionX: number;
   playerPositionZ: number;
   setPlayerPositionX: (x: number) => void;
@@ -33,6 +37,22 @@ const store = create<State>()(
      * Player Position
      * The position of the player in the board [x, z]
      */
+    initialPlayerPositionX: 0,
+    initialPlayerPositionZ: 0,
+    setInitialPlayerPositionX: (x: number) => {
+      set(() => {
+        return {
+          initialPlayerPositionX: x,
+        };
+      });
+    },
+    setInitialPlayerPositionZ: (z: number) => {
+      set(() => {
+        return {
+          initialPlayerPositionZ: z,
+        };
+      });
+    },
     playerPositionX: 0,
     playerPositionZ: 0,
     setPlayerPositionX: (x: number) => {
