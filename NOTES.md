@@ -64,3 +64,16 @@
 - Bunny Bonanza
 - Hare and Back Again
 - Hare of Darkness
+- Cube Bunny's Wonderland
+
+### Other Names
+
+- Down the Rabbit Hole: Cube Bunny's Adventure
+- Cubular Escape: Bunny's Journey
+- The Enchanted Cube: Bunny's Descent
+- Cube Hopper: Bunny's Epic Quest
+- Curious Cubes: Bunny's Underground Adventure
+- Beyond the Cube: Bunny's Rabbit Hole Chronicles
+- Cubed Conundrum: Bunny's Abyssal Voyage
+- Rabbit's Respite: Cube Bunny's Escape
+- Cube Chronicles: Bunny's Topsy-Turvy Wonderland
