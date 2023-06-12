@@ -43,11 +43,6 @@ body,
 }
 
 .interface {
-  > h1 {
-    font-size: 3em;
-    font-weight: 700;
-  }
-
   position: fixed;
   color: white;
   top: 0;
@@ -55,4 +50,9 @@ body,
   z-index: 1;
   margin: 0.5em;
   font-weight: 600;
+}
+
+.interface > h1 {
+  font-size: 3em;
+  font-weight: 700;
 }
