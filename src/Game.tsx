@@ -1,10 +1,10 @@
 import { OrbitControls } from "@react-three/drei";
 import { Perf } from "r3f-perf";
-import useGame from "../stores/useGame";
-import { levels } from "./level/levels";
-import Lights from "./Lights";
+import useGame from "./stores/useGame";
+import { levels } from "./level/data/levels";
+import Lights from "./lights/Lights";
 import Level from "./level/Level";
-import Player from "./Player";
+import Player from "./player/Player";
 import { useEffect } from "react";
 
 export default function Game() {

@@ -12,6 +12,7 @@ interface CollectibleProps {
   color?: CollectibleColor;
 }
 
+// Geometry
 const collectibleGeometry = new THREE.IcosahedronGeometry(
   BOARD_FACTOR * 0.22,
   0

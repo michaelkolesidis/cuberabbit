@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import useGame from "../../stores/useGame";
-import { LevelData } from "./levels";
-import { BOARD_HEIGHT } from "../../utils/constants";
-import { SquareColor, CollectibleColor } from "../../utils/enums";
-import Square from "./Square";
-import Collectible from "./Collectible";
+import useGame from "../stores/useGame";
+import { LevelData } from "./data/levels";
+import { BOARD_HEIGHT } from "../utils/constants";
+import { SquareColor, CollectibleColor } from "../utils/enums";
+import Square from "./components/Square";
+import Collectible from "./components/Collectible";
 
 interface LevelProps {
   level: LevelData;

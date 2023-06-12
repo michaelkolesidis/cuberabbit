@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { KeyboardControls, OrthographicCamera } from "@react-three/drei";
-import useGame from "../stores/useGame";
+import useGame from "./stores/useGame";
 import Game from "./Game";
 
 function App() {
@@ -19,6 +19,8 @@ function App() {
   const phase = useGame((state) => state.phase);
   const end = useGame((state) => state.end);
 
+  const [zoom, setZoom] = useState(30);
+
   useEffect(() => {
     if (
       collectibles === collected &&
@@ -29,6 +31,15 @@ function App() {
       console.log("ENDED!");
     }
   }, [collectibles, collected, playerPositionX, playerPositionZ]);
+
+  // Zoom on rabbit when level is cleared.
+  useEffect(() => {
+    if (phase === "ended") {
+      setTimeout(() => {
+        setZoom(70);
+      }, 1500);
+    }
+  }, [phase]);
 
   return (
     <>
@@ -59,7 +70,7 @@ function App() {
             near={1}
             far={100}
             position={[50, 30, 40]}
-            zoom={30}
+            zoom={zoom}
           />
           <Game />
         </Canvas>

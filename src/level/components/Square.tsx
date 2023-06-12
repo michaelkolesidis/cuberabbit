@@ -12,10 +12,18 @@ interface SquareProps {
   color?: SquareColor;
 }
 
+// Dimensions
+const squareDimensions = {
+  x: BOARD_FACTOR * 0.95,
+  y: 0.45,
+  z: BOARD_FACTOR * 0.95,
+};
+
+// Geometry
 const squareGeometry = new THREE.BoxGeometry(
-  BOARD_FACTOR * 0.95,
-  0.45,
-  BOARD_FACTOR * 0.95
+  squareDimensions.x,
+  squareDimensions.y,
+  squareDimensions.z
 );
 
 export default function Square({
@@ -26,13 +34,6 @@ export default function Square({
 }: SquareProps) {
   // const playerPositionX = useGame((state) => state.playerPositionX);
   // const playerPositionZ = useGame((state) => state.playerPositionZ);
-
-  // Dimensions
-  const squareDimensions = {
-    x: BOARD_FACTOR * 0.95,
-    y: 0.45,
-    z: BOARD_FACTOR * 0.95,
-  };
 
   // Position
   const squarePosition = new THREE.Vector3(
