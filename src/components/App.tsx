@@ -42,13 +42,14 @@ function App() {
       >
         <div className="interface">
           <p>CUBE RABBIT</p>
+          <p>Collect all the items and return to initial position</p>
           <p>—————————</p>
           <p>PHASE : {phase.toUpperCase()}</p>
           <p>
             COLLECTED : {collected}/{collectibles}
           </p>
           <p>MOVES : {moves}</p>
-          {phase === "ended" && <p>FINISHED!</p>}
+          {phase === "ended" && <p>LEVEL CLEAR!</p>}
         </div>
         <Canvas
         // camera={{ fov: 75, position: [20, 9, 11] }}
