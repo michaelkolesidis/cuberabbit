@@ -29,6 +29,9 @@ export default function Collectible({
   const playerPositionX = useGame((state) => state.playerPositionX);
   const playerPositionZ = useGame((state) => state.playerPositionZ);
 
+  const prevPlayerPositionX = useRef(playerPositionX);
+  const prevPlayerPositionZ = useRef(playerPositionZ);
+
   const collect = useGame((state) => state.collect);
 
   // Position
@@ -57,12 +60,20 @@ export default function Collectible({
       collectible.current.rotation.y = time * speed;
     }
 
-    if (playerPositionX === positionX && playerPositionZ === positionZ) {
+    if (
+      playerPositionX === positionX &&
+      playerPositionZ === positionZ &&
+      (playerPositionX !== prevPlayerPositionX.current ||
+        playerPositionZ !== prevPlayerPositionZ.current)
+    ) {
       if (!isCollected) {
         setIsCollected(true);
         collect();
       }
     }
+
+    prevPlayerPositionX.current = playerPositionX;
+    prevPlayerPositionZ.current = playerPositionZ;
   });
 
   return (
