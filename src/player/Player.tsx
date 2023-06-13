@@ -65,26 +65,44 @@ export default function Player({
       const unsubscribeKeys = subscribeKeys(
         (state) => state,
         (value) => {
+          console.log(value);
           if (rabbit.current) {
+            // Forward Move
             if (value.forward) {
-              // rabbit.current.position.x += BOARD_FACTOR;
+              // Only move if no other key is being pressed at the same time
+              if (value.backward || value.leftward || value.rightward) {
+                return;
+              }
               movePlayer(1, 0);
               rabbit.current.rotation.y = 0;
             }
+
+            // Backward Move
             if (value.backward) {
-              // rabbit.current.position.x -= BOARD_FACTOR;
+              // Only move if no other key is being pressed at the same time
+              if (value.forward || value.leftward || value.rightward) {
+                return;
+              }
               movePlayer(-1, 0);
               rabbit.current.rotation.y = Math.PI;
             }
 
+            // Leftward Move
             if (value.leftward) {
-              // rabbit.current.position.z -= BOARD_FACTOR;
+              // Only move if no other key is being pressed at the same time
+              if (value.forward || value.backward || value.rightward) {
+                return;
+              }
               movePlayer(0, -1);
               rabbit.current.rotation.y = Math.PI / 2;
             }
 
+            // Rightward Move
             if (value.rightward) {
-              // rabbit.current.position.z += BOARD_FACTOR;
+              // Only move if no other key is being pressed at the same time
+              if (value.forward || value.backward || value.leftward) {
+                return;
+              }
               movePlayer(0, 1);
               rabbit.current.rotation.y = -Math.PI / 2;
             }
