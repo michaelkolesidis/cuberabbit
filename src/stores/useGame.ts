@@ -29,6 +29,9 @@ type State = {
   start: () => void;
   restart: () => void;
   end: () => void;
+  // Other
+  firstTime: boolean;
+  setFirstTime: (isFirstTime: boolean) => void;
 };
 
 const useGame = create<State>()(
@@ -133,6 +136,19 @@ const useGame = create<State>()(
           return { phase: "ended" };
         }
         return {};
+      });
+    },
+
+    /**
+     * Other
+     *
+     */
+    firstTime: true,
+    setFirstTime: (isFirstTime: boolean) => {
+      set(() => {
+        return {
+          firstTime: isFirstTime,
+        };
       });
     },
   }))

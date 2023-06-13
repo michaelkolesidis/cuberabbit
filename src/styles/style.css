@@ -64,3 +64,8 @@ body,
   margin: 0.5em;
   font-size: 2em;
 }
+
+.stats-table {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}

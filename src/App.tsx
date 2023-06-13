@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { KeyboardControls, OrthographicCamera } from "@react-three/drei";
 import useGame from "./stores/useGame";
+import checkFirstTimeVisit from "./utils/functions/checkFirstTimeVisit";
 import Interface from "./interface/Interface";
 import Game from "./Game";
 
@@ -14,14 +15,20 @@ function App() {
   );
   const playerPositionX = useGame((state) => state.playerPositionX);
   const playerPositionZ = useGame((state) => state.playerPositionZ);
-  const moves = useGame((state) => state.moves);
   const collectibles = useGame((state) => state.collectibles);
   const collected = useGame((state) => state.collected);
   const phase = useGame((state) => state.phase);
   const end = useGame((state) => state.end);
 
+  // Camera zoom
   const [zoom, setZoom] = useState(30);
 
+  // Check if he visitor is accessing the website for the first time
+  useEffect(() => {
+    checkFirstTimeVisit();
+  }, []);
+
+  // Winning condition
   useEffect(() => {
     if (
       collectibles === collected &&

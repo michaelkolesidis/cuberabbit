@@ -5,6 +5,7 @@ function Interface() {
   const collectibles = useGame((state) => state.collectibles);
   const collected = useGame((state) => state.collected);
   const phase = useGame((state) => state.phase);
+  const firstTime = useGame((state) => state.firstTime);
 
   return (
     <>
@@ -13,19 +14,16 @@ function Interface() {
         <p className="version">[ ALPHA ]</p>
         <p>Collect all the items and return to initial position</p>
         <br />
-        <p>
-          Phase
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          {phase.toUpperCase()}
-        </p>
-        <p>
-          Collected &nbsp;&nbsp;&nbsp; {collected}/{collectibles}
-        </p>
-        <p>
-          Moves
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          {moves}
-        </p>
+        <div className="stats-table">
+          <p>First Time</p>
+          <p>{String(firstTime).toUpperCase()}</p>
+          <p>Phase</p>
+          <p>{phase.toUpperCase()}</p>
+          <p>Collected</p>
+          <p>{collected}/{collectibles}</p>
+          <p>Moves</p>
+          <p>{moves}</p>
+        </div>
         {phase === "ended" && <p>LEVEL CLEAR!</p>}
       </div>
     </>
