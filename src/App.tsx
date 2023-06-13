@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { KeyboardControls, OrthographicCamera } from "@react-three/drei";
 import useGame from "./stores/useGame";
+import Interface from "./interface/Interface";
 import Game from "./Game";
 
 function App() {
@@ -51,26 +52,7 @@ function App() {
           { name: "rightward", keys: ["ArrowLeft", "KeyA"] },
         ]}
       >
-        <div className="interface">
-          <h1>CUBE RABBIT</h1>
-          <p className="version">[ ALPHA ]</p>
-          <p>Collect all the items and return to initial position</p>
-          <br />
-          <p>
-            Phase
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {phase.toUpperCase()}
-          </p>
-          <p>
-            Collected &nbsp;&nbsp;&nbsp; {collected}/{collectibles}
-          </p>
-          <p>
-            Moves
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {moves}
-          </p>
-          {phase === "ended" && <p>LEVEL CLEAR!</p>}
-        </div>
+        <Interface />
         <Canvas
         // camera={{ fov: 75, position: [20, 9, 11] }}
         >

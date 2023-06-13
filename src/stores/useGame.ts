@@ -31,7 +31,7 @@ type State = {
   end: () => void;
 };
 
-const store = create<State>()(
+const useGame = create<State>()(
   subscribeWithSelector((set) => ({
     /**
      * Player Position
@@ -138,4 +138,4 @@ const store = create<State>()(
   }))
 );
 
-export default store;
+export default useGame;
