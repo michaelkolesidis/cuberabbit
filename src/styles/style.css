@@ -56,3 +56,16 @@ body,
   font-size: 3em;
   font-weight: 700;
 }
+
+.version {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 0.5em;
+  font-size: 2em;
+}
+
+.stats-table {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}

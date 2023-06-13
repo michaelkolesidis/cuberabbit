@@ -1,6 +1,6 @@
-const getLocalStorage = (key: string) => window.localStorage.getItem(key);
-const setLocalStorage = (key: string, value: string | number | boolean) =>
+const lsGet = (key: string) => window.localStorage.getItem(key);
+const lsSet = (key: string, value: string | number | boolean) =>
   window.localStorage.setItem(key, String(value));
-const clearLocalStorage = () => window.localStorage.clear();
+const lsClear = () => window.localStorage.clear();
 
-export { getLocalStorage, setLocalStorage, clearLocalStorage };
+export { lsGet, lsSet, lsClear };

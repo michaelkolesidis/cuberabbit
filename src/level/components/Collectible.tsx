@@ -13,10 +13,10 @@ interface CollectibleProps {
 }
 
 // Geometry
-const collectibleGeometry = new THREE.IcosahedronGeometry(
-  BOARD_FACTOR * 0.22,
-  0
-);
+const collectibleGeometry = new THREE.IcosahedronGeometry();
+
+// Radius
+const radius = BOARD_FACTOR * 0.22;
 
 export default function Collectible({
   positionX,
@@ -83,8 +83,8 @@ export default function Collectible({
           ref={collectible}
           position={collectiblePosition}
           geometry={collectibleGeometry}
+          scale={radius}
         >
-          {/* <icosahedronGeometry args={[BOARD_FACTOR * 0.22, 0]} /> */}
           <meshStandardMaterial flatShading color={collectibleColor} />
         </mesh>
       )}
