@@ -53,6 +53,7 @@ function App() {
       >
         <div className="interface">
           <h1>CUBE RABBIT</h1>
+          <p className="version">[ ALPHA ]</p>
           <p>Collect all the items and return to initial position</p>
           <br />
           <p>

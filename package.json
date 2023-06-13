@@ -1,7 +1,7 @@
 {
   "name": "cube-rabbit",
   "author": "Michael Kolesidis",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "UNLINCENSED",
   "private": true,
   "type": "module",
