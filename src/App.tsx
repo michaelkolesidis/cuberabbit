@@ -60,14 +60,12 @@ function App() {
         ]}
       >
         <Interface />
-        <Canvas
-        // camera={{ fov: 75, position: [20, 9, 11] }}
-        >
+        <Canvas>
           <OrthographicCamera
             makeDefault
             near={1}
             far={100}
-            position={[50, 30, 40]}
+            position={[50, 25, 40]}
             zoom={zoom}
           />
           <Game />

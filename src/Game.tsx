@@ -1,3 +1,4 @@
+import { useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import useGame from "./stores/useGame";
@@ -17,6 +18,11 @@ export default function Game() {
   }, [playerPositionX, playerPositionZ]);
 
   const currentLevel = levels[1];
+
+  useFrame((state) => {
+    state.camera.lookAt(0, -5, 0);
+    state.camera.updateProjectionMatrix();
+  });
 
   return (
     <>
