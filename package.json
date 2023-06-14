@@ -5,6 +5,18 @@
   "license": "UNLINCENSED",
   "private": true,
   "type": "module",
+  "keywords": [
+    "game",
+    "threejs",
+    "cube rabbit",
+    "cube",
+    "rabbit",
+    "bunny",
+    "react",
+    "3D",
+    "react-three-fiber",
+    "casual"
+  ],
   "scripts": {
     "dev": "vite",
     "start": "vite",
