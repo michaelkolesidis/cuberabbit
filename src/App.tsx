@@ -63,8 +63,8 @@ function App() {
         <Canvas>
           <OrthographicCamera
             makeDefault
-            near={1}
-            far={100}
+            // near={1}
+            // far={1000}
             position={[50, 25, 40]}
             zoom={zoom}
           />

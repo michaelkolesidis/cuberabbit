@@ -21,6 +21,11 @@ export default function Game() {
 
   useFrame((state) => {
     state.camera.lookAt(0, -5, 0);
+    // state.camera.lookAt(playerPositionX, -5, playerPositionZ);
+    // state.camera.position.x = playerPositionX + 50;
+    // state.camera.position.y = 25;
+    // state.camera.position.z = playerPositionZ + 40;
+
     state.camera.updateProjectionMatrix();
   });
 
