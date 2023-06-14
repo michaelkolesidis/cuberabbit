@@ -1,7 +1,6 @@
 {
   "name": "Cube Rabbit",
   "short_name": "Cube Rabbit",
-  "start_url": ".",
   "display": "standalone",
   "theme_color": "#121215",
   "background_color": "#121215",
