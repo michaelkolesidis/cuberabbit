@@ -10,9 +10,10 @@ function Interface() {
   return (
     <>
       <div className="interface">
-        <h1>CUBE RABBIT</h1>
+        <h1>CUBE RABBIT キューブウサギ</h1>
         <p className="version">[ ALPHA ]</p>
         <p>Collect all the items and return to initial position</p>
+        <p>アイテムをすべて集めて初期位置に戻る</p>
         <br />
         <div className="stats-table">
           <p>First Time</p>
@@ -20,11 +21,18 @@ function Interface() {
           <p>Phase</p>
           <p>{phase.toUpperCase()}</p>
           <p>Collected</p>
-          <p>{collected}/{collectibles}</p>
+          <p>
+            {collected}/{collectibles}
+          </p>
           <p>Moves</p>
           <p>{moves}</p>
         </div>
-        {phase === "ended" && <p>LEVEL CLEAR!</p>}
+        {phase === "ended" && (
+          <>
+            <p>LEVEL CLEAR!</p>
+            <p>レベルクリア！</p>
+          </>
+        )}
       </div>
     </>
   );
