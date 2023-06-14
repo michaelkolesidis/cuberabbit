@@ -1,3 +1,4 @@
+import "./style.css";
 import useGame from "../stores/useGame";
 
 function Interface() {

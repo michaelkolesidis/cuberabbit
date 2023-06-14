@@ -1,0 +1,27 @@
+.interface {
+  position: fixed;
+  color: white;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  margin: 0.5em;
+  font-weight: 600;
+}
+
+.interface > h1 {
+  font-size: 3em;
+  font-weight: 700;
+}
+
+.version {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 0.5em;
+  font-size: 2em;
+}
+
+.stats-table {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
