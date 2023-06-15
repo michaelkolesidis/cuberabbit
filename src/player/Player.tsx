@@ -58,6 +58,10 @@ export default function Player({
           if (rabbit.current) {
             rabbit.current.position.x += dx * BOARD_FACTOR;
             rabbit.current.position.z += dz * BOARD_FACTOR;
+
+            // Hopping
+            // TODO: Implement a better hopping using animations / phyisics
+            rabbit.current.position.y += 0.5;
           }
         }
       };

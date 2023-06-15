@@ -24,6 +24,9 @@ type State = {
   setCollectibles: (amount: number) => void;
   collected: number;
   collect: () => void;
+  // Time
+  startTime: number;
+  endTime: number;
   // Phases
   phase: "ready" | "playing" | "ended";
   start: () => void;
@@ -108,6 +111,12 @@ const useGame = create<State>()(
     },
 
     /**
+     * Time
+     */
+    startTime: 0,
+    endTime: 0,
+
+    /**
      * Phases
      * The phase of the game
      */
@@ -115,12 +124,11 @@ const useGame = create<State>()(
     start: () => {
       set((state) => {
         if (state.phase === "ready") {
-          return { phase: "playing" };
+          return { phase: "playing", startTime: Date.now() };
         }
         return {};
       });
     },
-
     restart: () => {
       set((state) => {
         if (state.phase === "playing" || state.phase === "ended") {
@@ -129,11 +137,14 @@ const useGame = create<State>()(
         return {};
       });
     },
-
     end: () => {
       set((state) => {
         if (state.phase === "playing") {
-          return { phase: "ended" };
+          const endTime = Date.now();
+          const startTime = state.startTime;
+          const elapsedTime = endTime - startTime;
+          console.log(elapsedTime);
+          return { phase: "ended", endTime: endTime };
         }
         return {};
       });
