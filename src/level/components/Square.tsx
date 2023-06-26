@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { RigidBody } from "@react-three/rapier";
 import * as THREE from "three";
 import useGame from "../../stores/useGame";
 import { BOARD_FACTOR } from "../../utils/constants";
@@ -37,8 +38,8 @@ export default function Square({
   );
 
   // Square Type
-  let squareColor,
-    movesLimit = Infinity;
+  let squareColor;
+  let movesLimit = Infinity;
 
   if (num === 1) {
     squareColor = Color.purple;
@@ -70,7 +71,6 @@ export default function Square({
       // setTimeout(() => {
       //   setCounter((oldCounter) => oldCounter + 1);
       // }, 500);
-
     } else if (playerPositionX !== positionX || playerPositionZ !== positionZ) {
       setIsPlayerOn(false);
     }
@@ -79,6 +79,7 @@ export default function Square({
   return (
     <>
       {/* {counter < movesLimit && ( */}
+      <RigidBody type="fixed" restitution={0} friction={1000}>
         <mesh
           position={squarePosition}
           geometry={squareGeometry}
@@ -86,6 +87,7 @@ export default function Square({
         >
           <meshStandardMaterial color={squareColor} />
         </mesh>
+      </RigidBody>
       {/* )} */}
     </>
   );

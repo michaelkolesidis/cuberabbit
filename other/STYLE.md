@@ -6,6 +6,7 @@
    1. React
    1. Fiber
    1. Drei
+   1. Physics
    1. Three.js
    1. Performance
    1. Leva

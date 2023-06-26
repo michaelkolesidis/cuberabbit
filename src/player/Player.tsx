@@ -1,6 +1,11 @@
 import { useRef, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF, useKeyboardControls } from "@react-three/drei";
+import {
+  RigidBody,
+  RapierRigidBody,
+  CuboidCollider,
+} from "@react-three/rapier";
 import * as THREE from "three";
 import useGame from "../stores/useGame";
 import { BOARD_FACTOR } from "../utils/constants";
@@ -27,6 +32,8 @@ export default function Player({
 
   const rabbitModel = useGLTF("./models/r.exs");
   const rabbit = useRef<THREE.Mesh>(null);
+  const rabbitBody = useRef<RapierRigidBody>(null);
+
   const [subscribeKeys] = useKeyboardControls();
 
   const initialPositionX = positionX * BOARD_FACTOR;
@@ -58,13 +65,11 @@ export default function Player({
           squaresMap[newPositionZ][newPositionX] !== 0 &&
           obstaclesMap[newPositionZ][newPositionX] === 0
         ) {
-          if (rabbit.current) {
-            rabbit.current.position.x += dx * BOARD_FACTOR;
-            rabbit.current.position.z += dz * BOARD_FACTOR;
-
-            // Hopping
-            // TODO: Implement a better hopping using animations / physics
-            rabbit.current.position.y += 0.5;
+          if (rabbitBody.current) {
+            rabbitBody.current.setLinvel(
+              { x: dx * BOARD_FACTOR * 0.95, y: 5, z: dz * BOARD_FACTOR },
+              true
+            );
           }
         }
       };
@@ -165,15 +170,24 @@ export default function Player({
 
   return (
     <>
-      <primitive
-        ref={rabbit}
-        // onClick={() => console.log("Clicked!")}
-        // onPointerEnter={() => console.log("Pointer entered")}
-        // onPointerLeave={() => console.log("Pointer left")}
-        object={rabbitModel.scene}
-        scale={1}
-        position={[initialPositionX, 0, initialPositionZ]}
-      />
+      <RigidBody
+        ref={rabbitBody}
+        colliders={false}
+        enabledRotations={[false, false, false]}
+        restitution={0}
+        friction={1000}
+      >
+        <CuboidCollider args={[1.35, 1, 1.4]} position={[0.28, 0, 0.1]} />
+        <primitive
+          ref={rabbit}
+          // onClick={() => console.log("Clicked!")}
+          // onPointerEnter={() => console.log("Pointer entered")}
+          // onPointerLeave={() => console.log("Pointer left")}
+          object={rabbitModel.scene}
+          scale={1}
+          position={[initialPositionX, 0, initialPositionZ]}
+        />
+      </RigidBody>
     </>
   );
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
+import { Physics } from "@react-three/rapier";
 import { Perf } from "r3f-perf";
 import useGame from "./stores/useGame";
 import { levels } from "./level/data/levels";
@@ -34,14 +35,16 @@ export default function Game() {
       <color args={["#121215"]} attach="background" />
       <Perf position="bottom-left" />
       <OrbitControls />
-      <Lights />
-      <Level level={currentLevel} />
-      <Player
-        positionX={playerPositionX}
-        positionZ={playerPositionZ}
-        squaresMap={currentLevel.squaresMap}
-        obstaclesMap={currentLevel.obstaclesMap}
-      />
+      <Physics debug={true}>
+        <Lights />
+        <Level level={currentLevel} />
+        <Player
+          positionX={playerPositionX}
+          positionZ={playerPositionZ}
+          squaresMap={currentLevel.squaresMap}
+          obstaclesMap={currentLevel.obstaclesMap}
+        />
+      </Physics>
     </>
   );
 }
