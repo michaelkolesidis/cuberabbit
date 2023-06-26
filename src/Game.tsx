@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { Perf } from "r3f-perf";
@@ -6,7 +7,6 @@ import { levels } from "./level/data/levels";
 import Lights from "./lights/Lights";
 import Level from "./level/Level";
 import Player from "./player/Player";
-import { useEffect } from "react";
 
 export default function Game() {
   const playerPositionX = useGame((state) => state.playerPositionX);
