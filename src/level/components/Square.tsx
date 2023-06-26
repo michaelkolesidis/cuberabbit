@@ -1,16 +1,14 @@
-import { useState } from "react";
-// import { useFrame } from "@react-three/fiber";
+import { useState, useEffect } from "react";
 import * as THREE from "three";
-// import useGame from "../../stores/useGame";
+import useGame from "../../stores/useGame";
 import { BOARD_FACTOR } from "../../utils/constants";
 import { Color } from "../../utils/enums";
 
 interface SquareProps {
   positionX: number;
-  positionY?: number;
+  positionY: number;
   positionZ: number;
   num: number;
-  color?: Color;
 }
 
 // Geometry
@@ -29,48 +27,66 @@ export default function Square({
   positionZ,
   num,
 }: SquareProps) {
-  // const playerPositionX = useGame((state) => state.playerPositionX);
-  // const playerPositionZ = useGame((state) => state.playerPositionZ);
-
   // Position
-  const [squarePosition] = useState(new THREE.Vector3(
-    positionX * BOARD_FACTOR,
-    positionY,
-    positionZ * BOARD_FACTOR
-  ))
+  const [squarePosition] = useState(
+    new THREE.Vector3(
+      positionX * BOARD_FACTOR,
+      positionY,
+      positionZ * BOARD_FACTOR
+    )
+  );
 
-  // Square Color
-  let squareColor;
+  // Square Type
+  let squareColor,
+    movesLimit = Infinity;
+
   if (num === 1) {
     squareColor = Color.purple;
   } else if (num === 2) {
     squareColor = Color.fuchsia;
+    movesLimit = 2;
   } else if (num === 3) {
     squareColor = Color.gray;
+    movesLimit = 1;
   } else if (num === 4) {
     squareColor = Color.yellow;
   }
 
   // Is the player on the square?
-  // const [isPlayerOn, setIsPlayerOn] = useState(false);
+  const playerPositionX = useGame((state) => state.playerPositionX);
+  const playerPositionZ = useGame((state) => state.playerPositionZ);
 
-  // useFrame(() => {
-  //   if (playerPositionX === positionX && playerPositionZ === positionZ) {
-  //     setIsPlayerOn(true);
-  //   } else {
-  //     setIsPlayerOn(false);
-  //   }
-  // });
+  const [isPlayerOn, setIsPlayerOn] = useState(false);
+  const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    if (
+      playerPositionX === positionX &&
+      playerPositionZ === positionZ &&
+      !isPlayerOn
+    ) {
+      setIsPlayerOn(true);
+
+      // setTimeout(() => {
+      //   setCounter((oldCounter) => oldCounter + 1);
+      // }, 500);
+
+    } else if (playerPositionX !== positionX || playerPositionZ !== positionZ) {
+      setIsPlayerOn(false);
+    }
+  }, [playerPositionX, playerPositionZ, positionX, positionZ, isPlayerOn]);
 
   return (
     <>
-      <mesh
-        position={squarePosition}
-        geometry={squareGeometry}
-        scale={[squareDimensions.x, squareDimensions.y, squareDimensions.z]}
-      >
-        <meshStandardMaterial color={squareColor} />
-      </mesh>
+      {/* {counter < movesLimit && ( */}
+        <mesh
+          position={squarePosition}
+          geometry={squareGeometry}
+          scale={[squareDimensions.x, squareDimensions.y, squareDimensions.z]}
+        >
+          <meshStandardMaterial color={squareColor} />
+        </mesh>
+      {/* )} */}
     </>
   );
 }
