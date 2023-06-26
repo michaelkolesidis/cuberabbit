@@ -1,5 +1,5 @@
 import "./style.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { addEffect } from "@react-three/fiber";
 import useGame from "../stores/useGame";
 

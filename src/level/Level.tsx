@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useGame from "../stores/useGame";
 import { LevelData } from "./data/levels";
 import { BOARD_HEIGHT } from "../utils/constants";
@@ -47,7 +47,9 @@ export default function Level({ level }: LevelProps) {
     }
   };
 
-  const squaresMap = level.squaresMap;
+  const [squaresMap] = useState(level.squaresMap);
+
+  // const squaresMap = level.squaresMap;
   const Squares = squaresMap.flatMap((row, rowIndex) =>
     row.map(
       (value, columnIndex) =>
@@ -62,6 +64,12 @@ export default function Level({ level }: LevelProps) {
         )
     )
   );
+
+  document.addEventListener("keydown", (e) => {
+    if (e.code === "KeyT") {
+      squaresMap[1][1] = 0;
+    }
+  });
 
   // Collectibles
   const getCollectibleColor = (value: number) => {
