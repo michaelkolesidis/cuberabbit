@@ -4,6 +4,7 @@ import { useGLTF, useKeyboardControls } from "@react-three/drei";
 import * as THREE from "three";
 import useGame from "../stores/useGame";
 import { BOARD_FACTOR } from "../utils/constants";
+import { gsap, Power1 } from "gsap";
 
 interface PlayerProps {
   positionX: number;
@@ -59,12 +60,58 @@ export default function Player({
           obstaclesMap[newPositionZ][newPositionX] === 0
         ) {
           if (rabbit.current) {
-            rabbit.current.position.x += dx * BOARD_FACTOR;
-            rabbit.current.position.z += dz * BOARD_FACTOR;
+            // rabbit.current.position.x += dx * BOARD_FACTOR;
+            // rabbit.current.position.z += dz * BOARD_FACTOR;
+
+            gsap.to(rabbit.current.position, {
+              x: `+=${dx * BOARD_FACTOR}`,
+              z: `+=${dz * BOARD_FACTOR}`,
+              duration: 0.12, // Adjust the duration as needed
+            });
+
+            // gsap.fromTo(
+            //   rabbit.current.position,
+            //   { x: rabbit.current.position.x, z: rabbit.current.position.z },
+            //   {
+            //     x: "+=" + dx * BOARD_FACTOR,
+            //     z: "+=" + dz * BOARD_FACTOR,
+            //     duration: 0.3, // Adjust the duration as needed
+            //   }
+            // );
 
             // Hopping
             // TODO: Implement a better hopping using animations / physics
-            rabbit.current.position.y += 0.5;
+            // rabbit.current.position.y += 0.5;
+
+            gsap.to(rabbit.current.position, {
+              y: "+=0.5", // Move the player slightly up
+              duration: 0.06,
+              ease: Power1.easeInOut,
+              onComplete: () => {
+                if (rabbit.current) {
+                  gsap.to(rabbit.current.position, {
+                    y: 0, // Move the player down to the initial position
+                    duration: 0.06,
+                    ease: Power1.easeInOut,
+                  });
+                }
+              },
+            });
+
+            // gsap.to(rabbit.current.position, {
+            //   y: "+=0.5", // Move the player slightly up
+            //   duration: 0.3,
+            //   ease: Power1.easeInOut,
+            //   onComplete: () => {
+            //     if (rabbit.current) {
+            //       gsap.to(rabbit.current.position, {
+            //         y: rabbit.current.position.y - 0.5, // Move the player down to the initial position
+            //         duration: 0.3,
+            //         ease: Power1.easeInOut,
+            //       });
+            //     }
+            //   },
+            // });
           }
         }
       };

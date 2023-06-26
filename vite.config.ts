@@ -15,4 +15,7 @@ export default defineConfig({
     minify: "esbuild",
     cssMinify: true,
   },
+  optimizeDeps: {
+    exclude: ['gsap']
+  }
 });
