@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import * as THREE from "three";
 import { BOARD_FACTOR } from "../../utils/constants";
 
@@ -27,10 +27,12 @@ export default function Obstacle({
   const obstacle = useRef<THREE.Mesh>(null);
 
   // Position
-  const obstaclePosition = new THREE.Vector3(
-    positionX * BOARD_FACTOR,
-    positionY,
-    positionZ * BOARD_FACTOR
+  const [obstaclePosition] = useState(
+    new THREE.Vector3(
+      positionX * BOARD_FACTOR,
+      positionY,
+      positionZ * BOARD_FACTOR
+    )
   );
 
   // Obstacle Type

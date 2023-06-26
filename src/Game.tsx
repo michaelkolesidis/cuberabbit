@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { Perf } from "r3f-perf";
@@ -17,7 +17,7 @@ export default function Game() {
     console.log("STORED Z: " + playerPositionZ);
   }, [playerPositionX, playerPositionZ]);
 
-  const currentLevel = levels[1];
+  const [currentLevel] = useState(levels[1]);
 
   useFrame((state) => {
     state.camera.lookAt(0, -5, 0);

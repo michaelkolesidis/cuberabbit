@@ -1,15 +1,16 @@
-// import { useState } from "react";
+import { useState } from "react";
 // import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 // import useGame from "../../stores/useGame";
 import { BOARD_FACTOR } from "../../utils/constants";
-import { SquareColor } from "../../utils/enums";
+import { Color } from "../../utils/enums";
 
 interface SquareProps {
   positionX: number;
   positionY?: number;
   positionZ: number;
-  color?: SquareColor;
+  num: number;
+  color?: Color;
 }
 
 // Geometry
@@ -26,28 +27,28 @@ export default function Square({
   positionX,
   positionY,
   positionZ,
-  color,
+  num,
 }: SquareProps) {
   // const playerPositionX = useGame((state) => state.playerPositionX);
   // const playerPositionZ = useGame((state) => state.playerPositionZ);
 
   // Position
-  const squarePosition = new THREE.Vector3(
+  const [squarePosition] = useState(new THREE.Vector3(
     positionX * BOARD_FACTOR,
     positionY,
     positionZ * BOARD_FACTOR
-  );
+  ))
 
   // Square Color
   let squareColor;
-  if (color === SquareColor.purple) {
-    squareColor = "#4037e4";
-  } else if (color === SquareColor.fuchsia) {
-    squareColor = "#9b2456";
-  } else if (color === SquareColor.gray) {
-    squareColor = "#151523";
-  } else if (color === SquareColor.yellow) {
-    squareColor = "#f98607";
+  if (num === 1) {
+    squareColor = Color.purple;
+  } else if (num === 2) {
+    squareColor = Color.fuchsia;
+  } else if (num === 3) {
+    squareColor = Color.gray;
+  } else if (num === 4) {
+    squareColor = Color.yellow;
   }
 
   // Is the player on the square?
