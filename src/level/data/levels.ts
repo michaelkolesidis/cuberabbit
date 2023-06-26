@@ -5,6 +5,7 @@ export interface LevelData {
   squaresMap: number[][];
   collectiblesMap: number[][];
   collectibles: number;
+  obstaclesMap: number[][];
   playerInitialPosition: number[];
 }
 
@@ -20,6 +21,10 @@ export interface LevelData {
 // 1: Yellow Gem
 // 2: Green Gem
 
+// Obstacles Map Legend
+// 0: No obstacles
+// 1: Tree
+
 export const levels: LevelData[] = [
   {
     name: "Level 0",
@@ -34,6 +39,11 @@ export const levels: LevelData[] = [
       [0, 1, 0],
     ],
     collectibles: 2,
+    obstaclesMap: [
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+    ],
     playerInitialPosition: [0, 0],
   },
   {
@@ -53,6 +63,13 @@ export const levels: LevelData[] = [
       [1, 0, 0, 1, 1],
     ],
     collectibles: 7,
+    obstaclesMap: [
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 1, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+    ],
     playerInitialPosition: [0, 0],
   },
   // {

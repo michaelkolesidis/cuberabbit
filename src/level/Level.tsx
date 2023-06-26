@@ -5,6 +5,7 @@ import { BOARD_HEIGHT } from "../utils/constants";
 import { SquareColor, CollectibleColor } from "../utils/enums";
 import Square from "./components/Square";
 import Collectible from "./components/Collectible";
+import Obstacle from "./components/Obstacle";
 
 interface LevelProps {
   level: LevelData;
@@ -90,10 +91,28 @@ export default function Level({ level }: LevelProps) {
     )
   );
 
+  // Obstacles
+  const obstaclesMap = level.obstaclesMap;
+  const Obstacles = obstaclesMap.flatMap((row, rowIndex) =>
+    row.map(
+      (value, columnIndex) =>
+        value !== 0 && (
+          <Obstacle
+            key={`${rowIndex}-${columnIndex}`}
+            num={1}
+            positionX={columnIndex}
+            positionY={1.0}
+            positionZ={rowIndex}
+          />
+        )
+    )
+  );
+
   return (
     <>
       {Squares}
       {Collectibles}
+      {Obstacles}
     </>
   );
 }

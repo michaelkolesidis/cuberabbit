@@ -40,6 +40,7 @@ export default function Game() {
         positionX={playerPositionX}
         positionZ={playerPositionZ}
         squaresMap={currentLevel.squaresMap}
+        obstaclesMap={currentLevel.obstaclesMap}
       />
     </>
   );

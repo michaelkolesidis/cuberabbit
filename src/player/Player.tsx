@@ -10,12 +10,14 @@ interface PlayerProps {
   positionY?: number;
   positionZ: number;
   squaresMap: number[][];
+  obstaclesMap: number[][];
 }
 
 export default function Player({
   positionX,
   positionZ,
   squaresMap,
+  obstaclesMap,
 }: PlayerProps) {
   const setPlayerPositionX = useGame((state) => state.setPlayerPositionX);
   const setPlayerPositionZ = useGame((state) => state.setPlayerPositionZ);
@@ -53,14 +55,15 @@ export default function Player({
           newPositionX < squaresMap[0].length &&
           newPositionZ >= 0 &&
           newPositionZ < squaresMap.length &&
-          squaresMap[newPositionZ][newPositionX] !== 0
+          squaresMap[newPositionZ][newPositionX] !== 0 &&
+          obstaclesMap[newPositionZ][newPositionX] === 0
         ) {
           if (rabbit.current) {
             rabbit.current.position.x += dx * BOARD_FACTOR;
             rabbit.current.position.z += dz * BOARD_FACTOR;
 
             // Hopping
-            // TODO: Implement a better hopping using animations / phyisics
+            // TODO: Implement a better hopping using animations / physics
             rabbit.current.position.y += 0.5;
           }
         }
