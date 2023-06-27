@@ -1,6 +1,7 @@
 {
   "name": "cube-rabbit",
   "author": "Michael Kolesidis",
+  "description": "The story of a cube-shaped rabbit.",
   "version": "0.0.1",
   "license": "UNLINCENSED",
   "private": true,

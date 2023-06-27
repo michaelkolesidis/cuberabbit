@@ -2,6 +2,8 @@
 
 # Cube Rabbit
 
+The story of a cube-shaped rabbit.
+
 ## License
 
 Copyright (c) 2023 Michael Kolesidis - All Rights Reserved.

@@ -58,14 +58,14 @@ export default function Collectible({
   }
 
   const [isCollected, setIsCollected] = useState(false);
-
-  const speed = 1;
+  const [speed] = useState(1);
+  const [direction] = useState(Math.random() < 0.5 ? 1 : -1);
 
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
 
     if (collectible.current) {
-      collectible.current.rotation.y = time * speed;
+      collectible.current.rotation.y = time * speed * direction;
     }
 
     if (
