@@ -10,6 +10,8 @@ function Interface() {
   const startTime = useGame((state) => state.startTime);
   const endTime = useGame((state) => state.endTime);
   const phase = useGame((state) => state.phase);
+  const outcome = useGame((state) => state.outcome);
+
   const firstTime = useGame((state) => state.firstTime);
 
   // Time
@@ -60,12 +62,18 @@ function Interface() {
           <p>Time</p>
           <p ref={time}></p>
         </div>
-        {phase === "ended" && (
-          <>
-            <p>LEVEL CLEAR!</p>
-            <p>レベルクリア！</p>
-          </>
-        )}
+        {phase === "ended" &&
+          (outcome === "win" ? (
+            <>
+              <p>LEVEL CLEAR!</p>
+              <p>レベルクリア！</p>
+            </>
+          ) : (
+            <>
+              <p>YOU LOST!</p>
+              <p>負けました</p>
+            </>
+          ))}
       </div>
     </>
   );

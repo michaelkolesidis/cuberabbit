@@ -32,6 +32,11 @@ export default function Level({ level }: LevelProps) {
 
   // Squares
   const [squaresMap] = useState(level.squaresMap);
+
+  const removeSquare = (x: number, z: number) => {
+    squaresMap[z][x] = 0;
+  };
+
   const Squares = squaresMap.flatMap((row, rowIndex) =>
     row.map(
       (value, columnIndex) =>
@@ -42,16 +47,11 @@ export default function Level({ level }: LevelProps) {
             positionX={columnIndex}
             positionY={BOARD_HEIGHT}
             positionZ={rowIndex}
+            removeSquare={removeSquare}
           />
         )
     )
   );
-
-  // document.addEventListener("keydown", (e) => {
-  //   if (e.code === "KeyT") {
-  //     squaresMap[1][1] = 0;
-  //   }
-  // });
 
   // Collectibles
   const [collectiblesMap] = useState(level.collectiblesMap);

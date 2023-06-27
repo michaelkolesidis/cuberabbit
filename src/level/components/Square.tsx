@@ -9,6 +9,7 @@ interface SquareProps {
   positionY: number;
   positionZ: number;
   num: number;
+  removeSquare: (x: number, z: number) => void;
 }
 
 // Geometry
@@ -26,6 +27,7 @@ export default function Square({
   positionY,
   positionZ,
   num,
+  removeSquare,
 }: SquareProps) {
   // Position
   const [squarePosition] = useState(
@@ -57,7 +59,7 @@ export default function Square({
   const playerPositionZ = useGame((state) => state.playerPositionZ);
 
   const [isPlayerOn, setIsPlayerOn] = useState(false);
-  const [counter, setCounter] = useState(0);
+  const [timesOn, setTimesOn] = useState(0);
 
   useEffect(() => {
     if (
@@ -67,10 +69,10 @@ export default function Square({
     ) {
       setIsPlayerOn(true);
 
-      // setTimeout(() => {
-      //   setCounter((oldCounter) => oldCounter + 1);
-      // }, 500);
-
+      setTimesOn((oldTimesOn) => oldTimesOn + 1);
+      if (timesOn >= movesLimit) {
+        removeSquare(positionX, positionZ);
+      }
     } else if (playerPositionX !== positionX || playerPositionZ !== positionZ) {
       setIsPlayerOn(false);
     }
@@ -78,7 +80,7 @@ export default function Square({
 
   return (
     <>
-      {/* {counter < movesLimit && ( */}
+      {timesOn < movesLimit + 1 && (
         <mesh
           position={squarePosition}
           geometry={squareGeometry}
@@ -86,7 +88,7 @@ export default function Square({
         >
           <meshStandardMaterial color={squareColor} />
         </mesh>
-      {/* )} */}
+      )}
     </>
   );
 }

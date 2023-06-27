@@ -27,7 +27,8 @@ type State = {
   phase: "ready" | "playing" | "ended";
   start: () => void;
   restart: () => void;
-  end: () => void;
+  end: (outcome: string) => void;
+  outcome: string | null;
   // Other
   firstTime: boolean;
   setFirstTime: (isFirstTime: boolean) => void;
@@ -133,18 +134,19 @@ const useGame = create<State>()(
         return {};
       });
     },
-    end: () => {
+    end: (outcome: string) => {
       set((state) => {
         if (state.phase === "playing") {
           const endTime = Date.now();
           const startTime = state.startTime;
           const elapsedTime = endTime - startTime;
           console.log(elapsedTime);
-          return { phase: "ended", endTime: endTime };
+          return { phase: "ended", outcome: outcome, endTime: endTime };
         }
         return {};
       });
     },
+    outcome: null,
 
     /**
      * Other

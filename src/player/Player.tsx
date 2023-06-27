@@ -23,6 +23,7 @@ export default function Player({
   const setPlayerPositionZ = useGame((state) => state.setPlayerPositionZ);
   const addMove = useGame((state) => state.addMove);
   const phase = useGame((state) => state.phase);
+  const end = useGame((state) => state.end);
   const start = useGame((state) => state.start);
 
   const rabbitModel = useGLTF("./models/r.exs");
@@ -63,7 +64,6 @@ export default function Player({
             rabbit.current.position.z += dz * BOARD_FACTOR;
 
             // Hopping
-            // TODO: Implement a better hopping using animations / physics
             rabbit.current.position.y += 0.5;
           }
         }
@@ -127,6 +127,19 @@ export default function Player({
       };
     }
   }, [phase]);
+
+  useEffect(() => {
+    if (squaresMap[positionZ][positionX] === 0) {
+      end("loss");
+      setInterval(() => {
+        if (rabbit.current) {
+          rabbit.current.position.y -= 1;
+          rabbit.current.rotation.x -= 0.5;
+          rabbit.current.rotation.z -= 0.5;
+        }
+      }, 100);
+    }
+  }, [positionX, positionZ]);
 
   // Player always faces forward when the game ends
   useEffect(() => {
