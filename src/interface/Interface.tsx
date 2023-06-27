@@ -52,10 +52,10 @@ function Interface() {
         <p className="version">[ ALPHA ]</p>
         <p>Collect all the items and return to initial position</p>
         <p>アイテムをすべて集めて初期位置に戻る</p>
-        <p>You can step on gray only once and on fuchsia twice</p>
-        <p>グレーは 1 回だけ、フクシアは 2 回しか踏めません</p>
+        <p>You can step on gray squares only once and on fuchsia twice</p>
+        <p>灰色の四角は 1 回だけ、フクシアは 2 回しか踏めません</p>
         <br />
-        <div className="stats-table-title">DEBUG PANEL</div>
+        <div className="stats-table-title">Stats panel for debugging</div>
         <div className="stats-table">
           <p>First Time</p>
           <p>{String(firstTime).toUpperCase()}</p>

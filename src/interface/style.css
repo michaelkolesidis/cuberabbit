@@ -23,7 +23,7 @@
 
 .stats-table {
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 1fr 3.5fr;
 }
 
 .haiku {
@@ -32,7 +32,7 @@
   right: 0;
   margin: 2em;
   font-size: 1.2em;
-  animation: hide 0.5s ease-in-out 10s forwards;
+  animation: hide 3s ease-in-out 10s forwards;
 }
 
 @keyframes hide {
