@@ -1,7 +1,8 @@
 import "./style.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { addEffect } from "@react-three/fiber";
 import useGame from "../stores/useGame";
+import haiku from "../data/haiku";
 
 function Interface() {
   const moves = useGame((state) => state.moves);
@@ -40,6 +41,10 @@ function Interface() {
     };
   }, [phase, startTime, endTime]); // Add dependencies here
 
+  const [haikuNumber] = useState(
+    Math.floor(Math.random() * (haiku.length - 1))
+  );
+
   return (
     <>
       <div className="interface">
@@ -47,7 +52,10 @@ function Interface() {
         <p className="version">[ ALPHA ]</p>
         <p>Collect all the items and return to initial position</p>
         <p>アイテムをすべて集めて初期位置に戻る</p>
+        <p>You can step on gray only once and on fuchsia twice</p>
+        <p>グレーは 1 回だけ、フクシアは 2 回しか踏めません</p>
         <br />
+        <div className="stats-table-title">DEBUG PANEL</div>
         <div className="stats-table">
           <p>First Time</p>
           <p>{String(firstTime).toUpperCase()}</p>
@@ -64,16 +72,21 @@ function Interface() {
         </div>
         {phase === "ended" &&
           (outcome === "win" ? (
-            <>
+            <div className="gameover">
               <p>LEVEL CLEAR!</p>
               <p>レベルクリア！</p>
-            </>
+            </div>
           ) : (
-            <>
+            <div className="gameover">
               <p>YOU LOST!</p>
               <p>負けました</p>
-            </>
+            </div>
           ))}
+        <div className="haiku">
+          <p>{haiku[haikuNumber]["line1"]}</p>
+          <p>{haiku[haikuNumber]["line2"]}</p>
+          <p>{haiku[haikuNumber]["line3"]}</p>
+        </div>
       </div>
     </>
   );
