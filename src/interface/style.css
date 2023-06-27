@@ -23,5 +23,38 @@
 
 .stats-table {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 3.5fr;
+}
+
+.haiku {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 2em;
+  font-size: 1.2em;
+  animation: hide 3s ease-in-out 10s forwards;
+}
+
+@keyframes hide {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.gameover {
+  font-size: 5em;
+  line-height: 1em;
+  text-shadow: 4px 4px 0px #121215;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }

@@ -7,18 +7,8 @@ import Interface from "./interface/Interface";
 import Game from "./Game";
 
 function App() {
-  const initialPlayerPositionX = useGame(
-    (state) => state.initialPlayerPositionX
-  );
-  const initialPlayerPositionZ = useGame(
-    (state) => state.initialPlayerPositionZ
-  );
-  const playerPositionX = useGame((state) => state.playerPositionX);
-  const playerPositionZ = useGame((state) => state.playerPositionZ);
-  const collectibles = useGame((state) => state.collectibles);
-  const collected = useGame((state) => state.collected);
   const phase = useGame((state) => state.phase);
-  const end = useGame((state) => state.end);
+  const outcome = useGame((state) => state.outcome);
 
   // Camera zoom
   const [zoom, setZoom] = useState(30);
@@ -28,21 +18,9 @@ function App() {
     checkFirstTimeVisit();
   }, []);
 
-  // Winning condition
-  useEffect(() => {
-    if (
-      collectibles === collected &&
-      initialPlayerPositionX === playerPositionX &&
-      initialPlayerPositionZ === playerPositionZ
-    ) {
-      end();
-      console.log("ENDED!");
-    }
-  }, [collectibles, collected, playerPositionX, playerPositionZ]);
-
   // Zoom on rabbit when level is cleared.
   useEffect(() => {
-    if (phase === "ended") {
+    if (phase === "ended" && outcome === "win") {
       setTimeout(() => {
         setZoom(70);
       }, 1500);
@@ -63,8 +41,8 @@ function App() {
         <Canvas>
           <OrthographicCamera
             makeDefault
-            near={1}
-            far={100}
+            // near={1}
+            // far={1000}
             position={[50, 25, 40]}
             zoom={zoom}
           />

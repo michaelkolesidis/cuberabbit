@@ -1,10 +1,6 @@
-// Copyright (c) 2023 Michael Kolesidis <michael.kolesidis@gmail.com>
-// Licensed under the GNU Affero General Public License v3.0.
-// https://www.gnu.org/licenses/gpl-3.0.html
-
 import { create } from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
-// import { getLocalStorage, setLocalStorage } from "./utils";
+// import { lsGet, lsSet } from "./utils";
 
 type State = {
   // Player position
@@ -24,11 +20,15 @@ type State = {
   setCollectibles: (amount: number) => void;
   collected: number;
   collect: () => void;
+  // Time
+  startTime: number;
+  endTime: number;
   // Phases
   phase: "ready" | "playing" | "ended";
   start: () => void;
   restart: () => void;
-  end: () => void;
+  end: (outcome: string) => void;
+  outcome: string | null;
   // Other
   firstTime: boolean;
   setFirstTime: (isFirstTime: boolean) => void;
@@ -108,6 +108,12 @@ const useGame = create<State>()(
     },
 
     /**
+     * Time
+     */
+    startTime: 0,
+    endTime: 0,
+
+    /**
      * Phases
      * The phase of the game
      */
@@ -115,12 +121,11 @@ const useGame = create<State>()(
     start: () => {
       set((state) => {
         if (state.phase === "ready") {
-          return { phase: "playing" };
+          return { phase: "playing", startTime: Date.now() };
         }
         return {};
       });
     },
-
     restart: () => {
       set((state) => {
         if (state.phase === "playing" || state.phase === "ended") {
@@ -129,15 +134,19 @@ const useGame = create<State>()(
         return {};
       });
     },
-
-    end: () => {
+    end: (outcome: string) => {
       set((state) => {
         if (state.phase === "playing") {
-          return { phase: "ended" };
+          const endTime = Date.now();
+          const startTime = state.startTime;
+          const elapsedTime = endTime - startTime;
+          console.log(elapsedTime);
+          return { phase: "ended", outcome: outcome, endTime: endTime };
         }
         return {};
       });
     },
+    outcome: null,
 
     /**
      * Other

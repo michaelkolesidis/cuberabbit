@@ -3,17 +3,18 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import useGame from "../../stores/useGame";
 import { BOARD_FACTOR } from "../../utils/constants";
-import { CollectibleColor } from "../../utils/enums";
+import { Color } from "../../utils/enums";
 
 interface CollectibleProps {
   positionX: number;
   positionY?: number;
   positionZ: number;
-  color?: CollectibleColor;
+  num?: number;
 }
 
-// Geometry
-const collectibleGeometry = new THREE.IcosahedronGeometry();
+// Geometries
+const gemGeometry = new THREE.IcosahedronGeometry();
+const cubeGeometry = new THREE.BoxGeometry();
 
 // Radius
 const radius = BOARD_FACTOR * 0.22;
@@ -22,7 +23,7 @@ export default function Collectible({
   positionX,
   positionY,
   positionZ,
-  color,
+  num,
 }: CollectibleProps) {
   const collectible = useRef<THREE.Mesh>(null);
 
@@ -35,29 +36,36 @@ export default function Collectible({
   const collect = useGame((state) => state.collect);
 
   // Position
-  const collectiblePosition = new THREE.Vector3(
-    positionX * BOARD_FACTOR,
-    positionY,
-    positionZ * BOARD_FACTOR
+  const [collectiblePosition] = useState(
+    new THREE.Vector3(
+      positionX * BOARD_FACTOR,
+      positionY,
+      positionZ * BOARD_FACTOR
+    )
   );
 
-  // Collectible Color
+  // Collectible Type
+  let collectibleGeometry;
   let collectibleColor;
-  if (color === CollectibleColor.golden) {
-    collectibleColor = "#ff9208";
-  } else if (color === CollectibleColor.green) {
-    collectibleColor = "#02b704";
+
+  /* Gem */
+  if (num === 1) {
+    collectibleGeometry = gemGeometry;
+    collectibleColor = Color.golden;
+  } else if (num === 2) {
+    collectibleGeometry = cubeGeometry;
+    collectibleColor = Color.green;
   }
 
   const [isCollected, setIsCollected] = useState(false);
-
-  const speed = 1;
+  const [speed] = useState(1);
+  const [direction] = useState(Math.random() < 0.5 ? 1 : -1);
 
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
 
     if (collectible.current) {
-      collectible.current.rotation.y = time * speed;
+      collectible.current.rotation.y = time * speed * direction;
     }
 
     if (

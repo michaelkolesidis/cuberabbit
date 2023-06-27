@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useGame from "../stores/useGame";
 import { LevelData } from "./data/levels";
 import { BOARD_HEIGHT } from "../utils/constants";
-import { SquareColor, CollectibleColor } from "../utils/enums";
 import Square from "./components/Square";
 import Collectible from "./components/Collectible";
+import Obstacle from "./components/Obstacle";
 
 interface LevelProps {
   level: LevelData;
@@ -31,59 +31,56 @@ export default function Level({ level }: LevelProps) {
   }, []);
 
   // Squares
-  const getSquareColor = (value: number) => {
-    switch (value) {
-      case 1:
-        return SquareColor.purple;
-      case 2:
-        return SquareColor.fuchsia;
-      case 3:
-        return SquareColor.gray;
-      case 4:
-        return SquareColor.yellow;
-      default:
-        return SquareColor.purple;
-    }
+  const [squaresMap] = useState(level.squaresMap);
+
+  const removeSquare = (x: number, z: number) => {
+    squaresMap[z][x] = 0;
   };
 
-  const squaresMap = level.squaresMap;
   const Squares = squaresMap.flatMap((row, rowIndex) =>
     row.map(
       (value, columnIndex) =>
         value !== 0 && (
           <Square
             key={`${rowIndex}-${columnIndex}`}
-            color={getSquareColor(value)}
+            num={value}
             positionX={columnIndex}
             positionY={BOARD_HEIGHT}
             positionZ={rowIndex}
+            removeSquare={removeSquare}
           />
         )
     )
   );
 
   // Collectibles
-  const getCollectibleColor = (value: number) => {
-    switch (value) {
-      case 1:
-        return CollectibleColor.golden;
-      case 2:
-        return CollectibleColor.green;
-      default:
-        return CollectibleColor.golden;
-    }
-  };
-
-  const collectiblesMap = level.collectiblesMap;
+  const [collectiblesMap] = useState(level.collectiblesMap);
   const Collectibles = collectiblesMap.flatMap((row, rowIndex) =>
     row.map(
       (value, columnIndex) =>
         value !== 0 && (
           <Collectible
             key={`${rowIndex}-${columnIndex}`}
-            color={getCollectibleColor(value)}
+            num={value}
             positionX={columnIndex}
             positionY={0.2}
+            positionZ={rowIndex}
+          />
+        )
+    )
+  );
+
+  // Obstacles
+  const [obstaclesMap] = useState(level.obstaclesMap);
+  const Obstacles = obstaclesMap.flatMap((row, rowIndex) =>
+    row.map(
+      (value, columnIndex) =>
+        value !== 0 && (
+          <Obstacle
+            key={`${rowIndex}-${columnIndex}`}
+            num={value}
+            positionX={columnIndex}
+            positionY={1.0}
             positionZ={rowIndex}
           />
         )
@@ -94,6 +91,7 @@ export default function Level({ level }: LevelProps) {
     <>
       {Squares}
       {Collectibles}
+      {Obstacles}
     </>
   );
 }
