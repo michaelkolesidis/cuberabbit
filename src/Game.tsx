@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { useFrame } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import { Perf } from "r3f-perf";
-import useGame from "./stores/useGame";
-import { levels } from "./level/data/levels";
-import Lights from "./lights/Lights";
-import Level from "./level/Level";
-import Player from "./player/Player";
+import { useEffect, useState } from 'react';
+import { useFrame } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
+import { Perf } from 'r3f-perf';
+import useGame from './stores/useGame';
+import { levels } from './level/data/levels';
+import Lights from './lights/Lights';
+import Level from './level/Level';
+import Player from './player/Player';
 
 export default function Game() {
   const initialPlayerPositionX = useGame(
@@ -22,8 +22,8 @@ export default function Game() {
   const end = useGame((state) => state.end);
 
   useEffect(() => {
-    console.log("STORED X: " + playerPositionX);
-    console.log("STORED Z: " + playerPositionZ);
+    console.log('STORED X: ' + playerPositionX);
+    console.log('STORED Z: ' + playerPositionZ);
   }, [playerPositionX, playerPositionZ]);
 
   const [currentLevel] = useState(levels[1]);
@@ -35,8 +35,8 @@ export default function Game() {
       initialPlayerPositionX === playerPositionX &&
       initialPlayerPositionZ === playerPositionZ
     ) {
-      end("win");
-      console.log("ENDED!");
+      end('win');
+      console.log('ENDED!');
     }
   }, [collectibles, collected, playerPositionX, playerPositionZ]);
 
@@ -48,7 +48,7 @@ export default function Game() {
 
   return (
     <>
-      <color args={["#121215"]} attach="background" />
+      <color args={['#121215']} attach="background" />
       <Perf position="bottom-left" />
       <OrbitControls />
       <Lights />

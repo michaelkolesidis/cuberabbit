@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { Canvas } from "@react-three/fiber";
-import { KeyboardControls, OrthographicCamera } from "@react-three/drei";
-import useGame from "./stores/useGame";
-import checkFirstTimeVisit from "./utils/functions/checkFirstTimeVisit";
-import Interface from "./interface/Interface";
-import Game from "./Game";
+import { useEffect, useState } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { KeyboardControls, OrthographicCamera } from '@react-three/drei';
+import useGame from './stores/useGame';
+import checkFirstTimeVisit from './utils/functions/checkFirstTimeVisit';
+import Interface from './interface/Interface';
+import Game from './Game';
 
 function App() {
   const phase = useGame((state) => state.phase);
@@ -20,7 +20,7 @@ function App() {
 
   // Zoom on rabbit when level is cleared.
   useEffect(() => {
-    if (phase === "ended" && outcome === "win") {
+    if (phase === 'ended' && outcome === 'win') {
       setTimeout(() => {
         setZoom(70);
       }, 1500);
@@ -31,10 +31,10 @@ function App() {
     <>
       <KeyboardControls
         map={[
-          { name: "forward", keys: ["ArrowDown", "KeyS"] },
-          { name: "backward", keys: ["ArrowUp", "KeyW"] },
-          { name: "leftward", keys: ["ArrowRight", "KeyD"] },
-          { name: "rightward", keys: ["ArrowLeft", "KeyA"] },
+          { name: 'forward', keys: ['ArrowDown', 'KeyS'] },
+          { name: 'backward', keys: ['ArrowUp', 'KeyW'] },
+          { name: 'leftward', keys: ['ArrowRight', 'KeyD'] },
+          { name: 'rightward', keys: ['ArrowLeft', 'KeyA'] },
         ]}
       >
         <Interface />
